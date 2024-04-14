@@ -42,11 +42,11 @@ dependencies:
   auto_animated: ^3.0.1
   flutter_polyline_points: ^2.0.0
   google_maps_flutter: ^2.1.5
-  geolocator: ^10.1.0
-  geocoding: ^2.0.4
+  geolocator: ^11.0.0
+  geocoding: ^3.0.0
   firebase_messaging: ^14.7.14
   firebase_core: ^2.25.3
-  flutter_local_notifications: ^16.3.2
+  flutter_local_notifications: ^17.0.0
   cloud_firestore: ^4.15.3
   sqflite: ^2.0.2
   shared_preferences: ^2.0.15
@@ -67,11 +67,17 @@ dependencies:
   image_pickers: ^2.0.0+2
   google_fonts: ^6.1.0
   gap: ^3.0.1
+  share_plus: ^8.0.2
+  carousel_slider: ^4.2.1
 
 flutter_native_splash:
-  background_image: assets/images/help.png
+
+  color: "#ffffff"
+  image: assets/images/help.png
+
   android_12:
     image: assets/images/help.png
+    color: "#ffffff"
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -97,6 +103,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/files/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

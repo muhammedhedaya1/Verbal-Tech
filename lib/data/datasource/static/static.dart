@@ -3,17 +3,17 @@ import 'package:help_me_talk/data/model/onboardingmodel.dart';
 
 List<OnBoardingModel> onBoardingList = [
   OnBoardingModel(
-      title: "Welcome to Help Me Talk App",
+      title: "بداية الرحلة",
       body:
-          "Take a step towards better mental health.\n We are here to support you.",
+          "اتخذ خطوة نحو صحة نفسية أفضل.\n نحن هنا لدعمك.",
       image:AppImageAsset.onBoardingImageOne),
   OnBoardingModel(
-      title: "Track Your Status",
+      title: "محاضرات اونلاين",
       body:
-          "Easily monitor your emotions daily. Understand your feelings, and take control of your mental well-being.",
+          "راقب عواطفك بسهولة يوميًا. افهم مشاعرك، وتحكم في صحتك العقلية.",
       image: AppImageAsset.onBoardingImageTwo),
   OnBoardingModel(
-      title: "Access Valuable resources",
-      body: "Access valuable steps in your treatment program",
+      title: "متابعة مع الدكتور",
+      body: "الوصول إلى خطوات قيمة في برنامج العلاج الخاص بك",
       image: AppImageAsset.onBoardingImageThree)
 ];

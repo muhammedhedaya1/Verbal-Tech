@@ -22,7 +22,7 @@ class CustomButtonOnBoarding extends GetView <OnBoardingControllerImp>{
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)
         ),
         child:const Text(
-          "Countine",
+          "استمر",
           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
         ),
       ),

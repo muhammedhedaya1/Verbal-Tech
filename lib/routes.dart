@@ -14,4 +14,5 @@ Map<String, Widget Function(BuildContext)> routes = {
   AppRoute.SignUpForDoctor:(context)=> const SignUpForDoctor(),
   AppRoute.DoctorLoginPage:(context)=> const DoctorLoginPage(),
   AppRoute.forgetPassword:(context)=> const ForgetPasswordForDoctor(),
+  // AppRoute.logininforpatient:(context)=> const logininforpatient(),
 };

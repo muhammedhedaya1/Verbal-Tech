@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_me_talk/core/constant/color.dart';
-import 'package:help_me_talk/core/localization/translation.dart';
 import 'package:help_me_talk/core/services/services.dart';
 import 'package:help_me_talk/routes.dart';
-import 'package:help_me_talk/view/screens/language.dart';
-import 'core/localization/changelocal.dart';
+import 'package:help_me_talk/view/screens/onboarding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,12 +14,8 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    LocalController controller =Get.put(LocalController());
     return GetMaterialApp(
-      translations: MyTranslation(),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      locale: controller.language,
       theme: ThemeData(
         textTheme: const TextTheme(
             headline1: TextStyle(
@@ -39,7 +33,7 @@ class MyApp extends StatelessWidget {
                 fontSize: 18)),
         primarySwatch: Colors.grey,
       ),
-      home: const Language(),
+      home: const OnBoarding(),
       routes: routes,
     );
   }

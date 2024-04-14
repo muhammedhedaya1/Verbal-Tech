@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_me_talk/controller/auth/login_controller.dart';
 import 'package:help_me_talk/core/constant/color.dart';
+import 'package:help_me_talk/data/model/categoryitem.dart';
+import 'package:help_me_talk/view/home/homescreen.dart';
 import 'package:help_me_talk/view/widgets/auth/CustomButtomAuth.dart';
 import 'package:help_me_talk/view/widgets/auth/customtextbodyauth.dart';
 import 'package:help_me_talk/view/widgets/auth/customtextformauth.dart';
 import 'package:help_me_talk/view/widgets/auth/customtexttitleauth.dart';
 import 'package:help_me_talk/view/widgets/auth/logoauth.dart';
 import 'package:help_me_talk/view/widgets/auth/textsignup.dart';
+
+import '../../../data/model/drawer_screen.dart';
 
 class DoctorLoginPage extends StatelessWidget {
   const DoctorLoginPage({super.key});
@@ -67,7 +71,11 @@ class DoctorLoginPage extends StatelessWidget {
             ),
             CustomButtomAuth(
               text: "Login",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                  return HomeScreen();
+                }));
+              },
             ),
             const SizedBox(
               height: 30,

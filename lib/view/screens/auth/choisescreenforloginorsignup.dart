@@ -42,7 +42,7 @@ class ChoiseScreenForLoginOrSignUp extends StatelessWidget {
                   onTap: () {
                     // Navigator.push(
                     //   context,
-                    //   MaterialPageRoute(builder: (context) => PatientLoginPage()),
+                    //   MaterialPageRoute(builder: (context) => DoctorLoginPage()),
                     // );
                   },
                   child: Column(
