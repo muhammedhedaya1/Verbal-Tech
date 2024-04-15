@@ -69,6 +69,7 @@ dependencies:
   gap: ^3.0.1
   share_plus: ^8.0.2
   carousel_slider: ^4.2.1
+  calendar_timeline: ^1.1.2
 
 flutter_native_splash:
 

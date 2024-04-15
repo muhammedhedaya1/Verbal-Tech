@@ -1,0 +1,115 @@
+import 'package:flutter/material.dart';
+import 'package:help_me_talk/view/home/tabs/main_screen.dart';
+import 'package:help_me_talk/view/home/tabs/process.dart';
+import 'package:help_me_talk/view/home/tabs/profile.dart';
+import 'package:help_me_talk/view/home/tabs/reports.dart';
+import 'package:help_me_talk/view/screens/exercise/add_task_bottom_sheet.dart';
+import '../../data/model/drawer_screen.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int selectedIndex = 0;
+  List<Widget> tabs = [
+    const MainScreen(),
+    const ProcessScreen(),
+    const ReportsScreen(),
+    const ProfileScreen()
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBody: true,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Center(
+          child: Text(
+            'Help Me Talk App',
+            style: TextStyle(color: Colors.blue),
+          ),
+        ),
+      ),
+      drawer: MyDrawer(
+        onMenuItemClick: (clickedItemPos) {},
+      ),
+      body: tabs[selectedIndex],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue,
+        onPressed: () {
+          showAddTaskBottomSheet();
+        },
+        shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
+          borderSide: const BorderSide(color: Colors.white),
+        ),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        notchMargin: 10,
+        color: Colors.white,
+        shape: const CircularNotchedRectangle(),
+        child: BottomNavigationBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          onTap: (index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          currentIndex: selectedIndex,
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.grey,
+          items: const [
+            BottomNavigationBarItem(
+              backgroundColor: Colors.transparent,
+              icon: Icon(Icons.home),
+              label: "",
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage('assets/images/proccesing.png'),
+              ),
+              label: "",
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage('assets/images/increase.png'),
+              ),
+              label: "",
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage('assets/images/profilepage.png'),
+              ),
+              label: "",
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  void showAddTaskBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return Padding(
+          padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: AddTaskBottomSheet(),
+        );
+      },
+    );
+  }
+}

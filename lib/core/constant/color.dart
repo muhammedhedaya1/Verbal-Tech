@@ -6,4 +6,5 @@ class AppColor{
   static const Color background=Colors.white;
   static const Color black=Colors.black;
   static const Color primaryColor= Colors.blue;
+  static const Color mintGreen= Color(0xFFDFECDB);
 }
