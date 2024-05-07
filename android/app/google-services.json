@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "838019629691",
+    "project_id": "helpmetalk-3117f",
+    "storage_bucket": "helpmetalk-3117f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838019629691:android:2e0b73a29a60770a7e18de",
+        "android_client_info": {
+          "package_name": "com.thebesacademygraduationproject.help_me_talk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838019629691-tftbe23lmrr33ith0drmbqnejs7botf3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgt3L_EhJOaEaHs0QG2ebnitzKuw8Zbfc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838019629691-tftbe23lmrr33ith0drmbqnejs7botf3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "838019629691-fqmbpv9eflup8bp70u2h1resdu68deh8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.thebesacademygraduationproject.helpMeTalk"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

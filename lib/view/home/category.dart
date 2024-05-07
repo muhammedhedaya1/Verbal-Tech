@@ -10,13 +10,13 @@ class CategoryForHomeScreen extends StatelessWidget {
     var categories = CategoryData.getCategories();
     return Expanded(
       child: Container(
-        margin: EdgeInsets.all(30),
+        margin: EdgeInsets.all(20),
         child: GridView.builder(
           itemCount: categories.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
+            mainAxisSpacing: 20,
+            crossAxisSpacing: 20,
           ),
           itemBuilder: (context, index) {
             return CategoryItem(categories[index], index);

@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   List<Widget> tabs = [
     const MainScreen(),
-    const ProcessScreen(),
+     TasksTab(),
     const ReportsScreen(),
     const ProfileScreen()
   ];
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           showAddTaskBottomSheet();
         },
         shape: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(20),
           borderSide: const BorderSide(color: Colors.white),
         ),
         child: const Icon(
@@ -55,48 +55,43 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Colors.white,
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        notchMargin: 10,
-        color: Colors.white,
-        shape: const CircularNotchedRectangle(),
-        child: BottomNavigationBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          onTap: (index) {
-            setState(() {
-              selectedIndex = index;
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          currentIndex: selectedIndex,
-          selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.grey,
-          items: const [
-            BottomNavigationBarItem(
-              backgroundColor: Colors.transparent,
-              icon: Icon(Icons.home),
-              label: "",
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        onTap: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        currentIndex: selectedIndex,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(
+            backgroundColor: Colors.transparent,
+            icon: Icon(Icons.home),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage('assets/images/proccesing.png'),
             ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage('assets/images/proccesing.png'),
-              ),
-              label: "",
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage('assets/images/increase.png'),
             ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage('assets/images/increase.png'),
-              ),
-              label: "",
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage('assets/images/profilepage.png'),
             ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage('assets/images/profilepage.png'),
-              ),
-              label: "",
-            ),
-          ],
-        ),
+            label: "",
+          ),
+        ],
       ),
     );
   }

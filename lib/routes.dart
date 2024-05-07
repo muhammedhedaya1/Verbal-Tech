@@ -11,8 +11,8 @@ Map<String, Widget Function(BuildContext)> routes = {
   AppRoute.ChoiseScreenForLoginOrSignUp: (context) => const ChoiseScreenForLoginOrSignUp() ,
   AppRoute.onBoarding: (context) => const OnBoarding() ,
   //Auth
-  AppRoute.SignUpForDoctor:(context)=> const SignUpForDoctor(),
-  AppRoute.DoctorLoginPage:(context)=> const DoctorLoginPage(),
-  AppRoute.forgetPassword:(context)=> const ForgetPasswordForDoctor(),
+  AppRoute.SignUpForDoctor:(context)=> const SignUp(),
+  AppRoute.DoctorLoginPage:(context)=> const LogIn(),
+  AppRoute.forgetPassword:(context)=> const ForgotPassword(),
   // AppRoute.logininforpatient:(context)=> const logininforpatient(),
 };

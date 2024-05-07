@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:help_me_talk/core/shared/network/firebase/firebase_manager.dart';
+import 'package:help_me_talk/data/model/exercise_model/exercise_model.dart';
+
 
 class AddTaskBottomSheet extends StatefulWidget {
   @override
@@ -27,57 +30,57 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             style: GoogleFonts.poppins(
                 color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(
+          SizedBox(
             height: 25,
           ),
           TextFormField(
             controller: titleController,
             decoration: InputDecoration(
-              label: const Text("اسم التمرين"),
+              label: Text("التمرين"),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   color: Colors.blue,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   color: Colors.blue,
                 ),
               ),
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 18,
           ),
           TextFormField(
             controller: descriptionController,
             decoration: InputDecoration(
-              label: const Text("وصف التمرين"),
+              label: Text("وصف التمرين"),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   color: Colors.blue,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   color: Colors.blue,
                 ),
               ),
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 18,
           ),
           Text(
-            "اختر الوقت",
+            "اختر الموعد المناسب",
             style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
           ),
-          const SizedBox(
+          SizedBox(
             height: 9,
           ),
           InkWell(
@@ -87,21 +90,45 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             child: Text(
               selectedDate.toString().substring(0, 10),
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 color: Colors.blue,
               ),
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 18,
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.blue,minimumSize: const Size(350, 50)),
-            onPressed: () {},
-            child: const Text(
-              "اضافه",
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+            onPressed: () {
+              ExerciseModel exercise = ExerciseModel(
+                  title: titleController.text,
+                  description: descriptionController.text,
+                  date:DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
+              FirebaseManager.addExercise(exercise);
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("Successfully"),
+                    content: Text("Tasks Add To Firebase"),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                        child: Text("Thanks"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: Text(
+              "حفظ",
               style: TextStyle(color: Colors.white),
             ),
           ),
@@ -115,7 +142,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(const Duration(days: 365)));
+        lastDate: DateTime.now().add(Duration(days: 365)));
     if (chosenData == null) {
       return;
     }

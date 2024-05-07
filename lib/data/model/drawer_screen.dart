@@ -32,7 +32,7 @@ class MyDrawer extends StatelessWidget {
                 ),
                 const Text(
                   'Help Me Talk App',
-                  style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.black),
+                  style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black),
                 ),
               ],
             ),

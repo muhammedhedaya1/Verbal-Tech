@@ -21,9 +21,9 @@ class CategoryItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment:MainAxisAlignment.center,
         children: [
-          Image.asset(categoryData.image!,height: 110,),
+          Image.asset(categoryData.image!,height: 100,),
           Center(child: Text(categoryData.title!,style: const TextStyle(
-            fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+            fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white,
           ),)),
         ],
       ),

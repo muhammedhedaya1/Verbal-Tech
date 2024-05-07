@@ -1,20 +1,34 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_me_talk/core/constant/color.dart';
 import 'package:help_me_talk/core/services/services.dart';
+import 'package:help_me_talk/core/shared/network/firebase/firebase_notifications.dart';
 import 'package:help_me_talk/routes.dart';
 import 'package:help_me_talk/view/screens/onboarding.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  WidgetsFlutterBinding.ensureInitialized();
   await initialServices();
+  await FirebaseNotifications().initNotifications();
   runApp(const MyApp());
 }
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: const TextTheme(

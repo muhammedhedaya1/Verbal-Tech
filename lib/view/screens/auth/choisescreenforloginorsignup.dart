@@ -12,7 +12,7 @@ class ChoiseScreenForLoginOrSignUp extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text('Login As :',style: GoogleFonts.elMessiri(fontSize:25,fontWeight: FontWeight.bold ),),
+        title: Text('تسجيل دخول كــ',style: GoogleFonts.elMessiri(fontSize:25,fontWeight: FontWeight.bold ),),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,7 +24,7 @@ class ChoiseScreenForLoginOrSignUp extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DoctorLoginPage()),
+                      MaterialPageRoute(builder: (context) => LogIn()),
                     );
                   },
                   child: Column(
@@ -34,7 +34,7 @@ class ChoiseScreenForLoginOrSignUp extends StatelessWidget {
                         width: 250,
                         height: 250,
                       ),
-                      const Text('Doctor',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                      const Text('دكتور',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                     ],
                   ),
                 ),
@@ -52,7 +52,7 @@ class ChoiseScreenForLoginOrSignUp extends StatelessWidget {
                         width: 250,
                         height: 250,
                       ),
-                      const Text('Patient',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                      const Text('ولي امر',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                     ],
                   ),
                 ),
