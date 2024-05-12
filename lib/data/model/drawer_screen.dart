@@ -39,19 +39,6 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(
-              Icons.settings,
-            ),
-            title: const Text(
-              'الاعدادات',
-            ),
-            onTap: () {
-              // Navigator.pop(context);
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) =>  Settings Screen()));
-            },
-          ),
-          ListTile(
-            leading: const Icon(
               Icons.share,
             ),
             title: const Text(

@@ -12,7 +12,12 @@ class ChoiseScreenForLoginOrSignUp extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text('تسجيل دخول كــ',style: GoogleFonts.elMessiri(fontSize:25,fontWeight: FontWeight.bold ),),
+        title: Text(
+          'تسجيل دخول كــ',
+          style:
+              GoogleFonts.elMessiri(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +39,11 @@ class ChoiseScreenForLoginOrSignUp extends StatelessWidget {
                         width: 250,
                         height: 250,
                       ),
-                      const Text('دكتور',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                      const Text(
+                        'دكتور',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
                     ],
                   ),
                 ),
@@ -52,7 +61,11 @@ class ChoiseScreenForLoginOrSignUp extends StatelessWidget {
                         width: 250,
                         height: 250,
                       ),
-                      const Text('ولي امر',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                      const Text(
+                        'ولي امر',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
                     ],
                   ),
                 ),

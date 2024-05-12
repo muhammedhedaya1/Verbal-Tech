@@ -5,6 +5,6 @@ class ReportsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("كفايه علوقيه لحد كده"),);
+    return Center(child: Text("يارب♥"),);
   }
 }

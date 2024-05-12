@@ -10,14 +10,4 @@ class FirebaseNotifications {
     String? token = await firebaseMessaging.getToken();
     print("Token: $token");
   }
-
-  //*handle notifications when recieved
-  void handleMessage(RemoteMessage? message) {
-    if (message == null) return;
-  }
-
-  Future<void> handleBackgroundNotification() async {
-    FirebaseMessaging.instance.getInitialMessage().then(handleMessage);
-    FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
-  }
 }
