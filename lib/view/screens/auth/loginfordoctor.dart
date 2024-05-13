@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:help_me_talk/core/services/auth.dart';
 import 'package:help_me_talk/view/home/homescreen.dart';
 import 'package:help_me_talk/view/screens/auth/signupfordoctor.dart';
-
 import 'forgetpasswordfordoctor.dart';
 
 class LogIn extends StatefulWidget {
@@ -207,7 +206,7 @@ class _LogInState extends State<LogIn> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      AuthMethods().signInWithGoogle(context);
+                      AuthService().signInWithGoogle(context);
                     },
                     child: Image.asset(
                       "assets/images/googleicon.png",
