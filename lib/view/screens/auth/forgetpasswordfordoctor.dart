@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:help_me_talk/view/screens/auth/signupfordoctor.dart';
 
 class ForgotPassword extends StatefulWidget {
-  const ForgotPassword({super.key});
+  const ForgotPassword({Key? key}) : super(key: key);
 
   @override
   State<ForgotPassword> createState() => _ForgotPasswordState();
@@ -19,16 +19,26 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-        "Password Reset Email has been sent !",
-        style: TextStyle(fontSize: 20.0),
-      )));
+        content: Text(
+          "تم إرسال رسالة إعادة تعيين كلمة المرور!",
+          style: TextStyle(fontSize: 20.0),
+        ),
+      ));
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(
-              "No user found for that email.",
+              "هذا البريد الإلكتروني غير مسجل. من فضلك تأكد من البريد الإلكتروني المدخل.",
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              "حدث خطأ ما. الرجاء المحاولة مرة أخرى لاحقًا.",
               style: TextStyle(fontSize: 20.0),
             ),
           ),
@@ -40,7 +50,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           const SizedBox(
@@ -49,9 +59,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           Container(
             alignment: Alignment.topCenter,
             child: const Text(
-              "Password Recovery",
+              "إعادة تعيين كلمة المرور",
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.blue,
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold),
             ),
@@ -60,110 +70,111 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             height: 10.0,
           ),
           const Text(
-            "Enter your mail",
+            "من فضلك ادخل البريد الالكتروني",
             style: TextStyle(
-                color: Colors.white,
+                color: Colors.blue,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold),
           ),
+          SizedBox(height: 20),
+          Image.asset("assets/images/check email.png"),
           Expanded(
-              child: Form(
-                  key: _formkey,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: ListView(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          decoration: BoxDecoration(
-                            border:
-                                Border.all(color: Colors.white70, width: 2.0),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please Enter Email';
-                              }
-                              return null;
-                            },
-                            controller: mailcontroller,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
-                                hintText: "Email",
-                                hintStyle: TextStyle(
-                                    fontSize: 18.0, color: Colors.white),
-                                prefixIcon: Icon(
-                                  Icons.person,
-                                  color: Colors.white70,
-                                  size: 30.0,
-                                ),
-                                border: InputBorder.none),
+            child: Form(
+              key: _formkey,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: ListView(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue, width: 2.0),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'يجب ادخال البريد الإلكتروني';
+                          }
+                          return null;
+                        },
+                        controller: mailcontroller,
+                        style: const TextStyle(color: Colors.blue),
+                        decoration: const InputDecoration(
+                            hintStyle:
+                                TextStyle(fontSize: 18.0, color: Colors.blue),
+                            suffixIcon: Icon(
+                              Icons.email,
+                              color: Colors.blue,
+                              size: 30.0,
+                            ),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 40.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        if (_formkey.currentState!.validate()) {
+                          setState(() {
+                            email = mailcontroller.text;
+                          });
+                          resetPassword();
+                        }
+                      },
+                      child: Container(
+                        width: 150,
+                        padding: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(50)),
+                        child: const Center(
+                          child: Text(
+                            "افحص البريد الخاص بك",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 50.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "ليس لديك حساب؟",
+                          style: TextStyle(fontSize: 18.0, color: Colors.blue),
+                        ),
                         const SizedBox(
-                          height: 40.0,
+                          width: 5.0,
                         ),
                         GestureDetector(
                           onTap: () {
-                            if (_formkey.currentState!.validate()) {
-                              setState(() {
-                                email = mailcontroller.text;
-                              });
-                              resetPassword();
-                            }
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SignUp()));
                           },
-                          child: Container(
-                            width: 140,
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: const Center(
-                              child: Text(
-                                "Send Email",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
+                          child: const Text(
+                            "   قم بإنشاء حساب الآن",
+                            style: TextStyle(
+                                color: Colors.pink,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                        const SizedBox(
-                          height: 50.0,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Don't have an account?",
-                              style: TextStyle(
-                                  fontSize: 18.0, color: Colors.white),
-                            ),
-                            const SizedBox(
-                              width: 5.0,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const SignUp()));
-                              },
-                              child: const Text(
-                                "Create",
-                                style: TextStyle(
-                                    color: Color.fromARGB(225, 184, 166, 6),
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            )
-                          ],
-                        )
                       ],
-                    ),
-                  ))),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

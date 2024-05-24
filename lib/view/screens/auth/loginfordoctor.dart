@@ -6,7 +6,8 @@ import 'package:help_me_talk/view/screens/auth/signupfordoctor.dart';
 import 'forgetpasswordfordoctor.dart';
 
 class LogIn extends StatefulWidget {
-  const LogIn({Key? key});
+
+  const LogIn({Key? key}) : super(key: key);
 
   @override
   State<LogIn> createState() => _LogInState();
@@ -16,49 +17,56 @@ class _LogInState extends State<LogIn> {
   String email = "";
   String password = "";
 
-  TextEditingController mailcontroller = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController mailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  final _formkey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   userLogin() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    setState(() {
+      email = mailController.text;
+      password = passwordController.text;
+    });
+
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
       );
     } on FirebaseAuthException catch (e) {
+      String errorMessage;
       if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.orangeAccent,
-          content: Text(
-            "No User Found for that Email",
-            style: TextStyle(fontSize: 18.0),
-          ),
-        ));
+        errorMessage = "No User Found for that Email";
       } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.orangeAccent,
-          content: Text(
-            "Wrong Password Provided by User",
-            style: TextStyle(fontSize: 18.0),
-          ),
-        ));
+        errorMessage = "Wrong Password Provided by User";
+      } else {
+        errorMessage = "Wrong Email Or Password";
       }
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.orangeAccent,
+        content: Text(
+          errorMessage,
+          style: TextStyle(fontSize: 18.0),
+        ),
+      ));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Change to your desired background color
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 50.0), // Add vertical padding
+          padding: EdgeInsets.symmetric(vertical: 50.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -76,7 +84,7 @@ class _LogInState extends State<LogIn> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Form(
-                  key: _formkey,
+                  key: _formKey,
                   child: Column(
                     children: [
                       Container(
@@ -89,13 +97,13 @@ class _LogInState extends State<LogIn> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: TextFormField(
+                          controller: mailController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please Enter E-mail';
+                              return 'من فضلك ادخل البريد الخاص بك';
                             }
                             return null;
                           },
-                          controller: mailcontroller,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "البريد الالكتروني",
@@ -117,10 +125,10 @@ class _LogInState extends State<LogIn> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: TextFormField(
-                          controller: passwordcontroller,
+                          controller: passwordController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please Enter Password';
+                              return 'من فضلك ادخل كلمه المرور';
                             }
                             return null;
                           },
@@ -137,15 +145,7 @@ class _LogInState extends State<LogIn> {
                       ),
                       SizedBox(height: 30.0),
                       GestureDetector(
-                        onTap: () {
-                          if (_formkey.currentState!.validate()) {
-                            setState(() {
-                              email = mailcontroller.text;
-                              password = passwordcontroller.text;
-                            });
-                          }
-                          userLogin();
-                        },
+                        onTap: userLogin,
                         child: Container(
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.symmetric(
@@ -240,7 +240,7 @@ class _LogInState extends State<LogIn> {
                     child: Text(
                       "قم بإنشاء حساب الآن",
                       style: TextStyle(
-                        color: Color(0xFF41C8E1),
+                        color: Colors.pink,
                         fontSize: 20.0,
                         fontWeight: FontWeight.w500,
                       ),

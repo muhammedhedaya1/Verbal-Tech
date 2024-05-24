@@ -1,12 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:help_me_talk/view/home/tabs/main_screen.dart';
 import 'package:help_me_talk/view/home/tabs/process.dart';
 import 'package:help_me_talk/view/home/tabs/profile.dart';
 import 'package:help_me_talk/view/home/tabs/reports.dart';
+import 'package:help_me_talk/view/screens/auth/loginfordoctor.dart';
 import 'package:help_me_talk/view/screens/exercise/add_task_bottom_sheet.dart';
 import '../../data/model/drawer_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+
+
   const HomeScreen({super.key});
 
   @override
@@ -17,9 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   List<Widget> tabs = [
     const MainScreen(),
-     TasksTab(),
+    TasksTab(),
     const ReportsScreen(),
-    const ProfileScreen()
+     ProfileScreen()
   ];
 
   @override
@@ -28,10 +32,22 @@ class _HomeScreenState extends State<HomeScreen> {
       extendBody: true,
       backgroundColor: Colors.white,
       appBar: AppBar(
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       FirebaseAuth.instance.signOut();
+        //       Navigator.pushReplacement(
+        //         context,
+        //         MaterialPageRoute(builder: (context) => LogIn()),
+        //       );
+        //     },
+        //     icon: Icon(Icons.logout),
+        //   ),
+        // ],
         backgroundColor: Colors.white,
         title: const Center(
           child: Text(
-            'Help Me Talk App',
+            'Help Me Talk',
             style: TextStyle(color: Colors.blue),
           ),
         ),
@@ -95,13 +111,15 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
   void showAddTaskBottomSheet() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) {
         return Padding(
-          padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: AddTaskBottomSheet(),
         );
       },

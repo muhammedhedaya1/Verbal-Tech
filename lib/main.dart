@@ -6,6 +6,7 @@ import 'package:help_me_talk/core/services/services.dart';
 import 'package:help_me_talk/core/shared/network/firebase/firebase_notifications.dart';
 import 'package:help_me_talk/firebase_options.dart';
 import 'package:help_me_talk/routes.dart';
+import 'package:help_me_talk/view/home/homescreen.dart';
 import 'package:help_me_talk/view/screens/auth/choisescreenforloginorsignup.dart';
 import 'package:help_me_talk/view/screens/onboardingprefect/screen_one.dart';
 
@@ -14,7 +15,6 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  WidgetsFlutterBinding.ensureInitialized();
   await initialServices();
   await FirebaseNotifications().initNotifications();
 
@@ -28,12 +28,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoggedIn = CacheHelper().isLoggedIn();
+    bool isOnBoardingVisited = CacheHelper().getData(key: "isOnBoardingVisited") ?? false;
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CacheHelper().getData(key: "isOnBoardingVisited") ?? false
+      home: isLoggedIn
           ? ChoiseScreenForLoginOrSignUp()
-          : OnboardingScreenOne(),
-      // Show onboarding screens only for the first time
+          : (isOnBoardingVisited
+          ? HomeScreen()
+          : OnboardingScreenOne()),
       routes: routes,
     );
   }

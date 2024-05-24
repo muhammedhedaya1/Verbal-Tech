@@ -18,37 +18,44 @@ class _SignUpState extends State<SignUp> {
   final _formkey = GlobalKey<FormState>();
 
   registration() async {
-    if (password != null &&
-        namecontroller.text != "" &&
-        mailcontroller.text != "") {
-      try {
-        UserCredential userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: email, password: password);
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text(
-              "Registered Successfully",
-              style: TextStyle(fontSize: 20.0),
-            )));
-        // ignore: use_build_context_synchronously
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const LogIn()));
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              backgroundColor: Colors.orangeAccent,
-              content: Text(
-                "Password Provided is too Weak",
-                style: TextStyle(fontSize: 18.0),
-              )));
-        } else if (e.code == "email-already-in-use") {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              backgroundColor: Colors.orangeAccent,
-              content: Text(
-                "Account Already exists",
-                style: TextStyle(fontSize: 18.0),
-              )));
-        }
+    if (!_formkey.currentState!.validate()) {
+      return;
+    }
+    setState(() {
+      email = mailcontroller.text;
+      password = passwordcontroller.text;
+      name = namecontroller.text;
+    });
+
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "تم انشاء الحساب بنجاح",
+            style: TextStyle(fontSize: 20.0),
+          ),
+        ),
+      );
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const LogIn()));
+    } on FirebaseAuthException catch (e) {
+      String errorMessage = "An error occurred. Please try again.";
+      if (e.code == 'weak-password') {
+        errorMessage = "كلمه السر ضعيفه للغايه";
+      } else if (e.code == 'email-already-in-use') {
+        errorMessage = "هذا الحساب مستخدم من قبل";
       }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.orangeAccent,
+          content: Text(
+            errorMessage,
+            style: TextStyle(fontSize: 18.0),
+          ),
+        ),
+      );
     }
   }
 
@@ -74,7 +81,7 @@ class _SignUpState extends State<SignUp> {
               ),
               Container(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+                  padding: const EdgeInsets.all(1),
                   child: Form(
                     key: _formkey,
                     child: Column(
@@ -94,7 +101,7 @@ class _SignUpState extends State<SignUp> {
                             controller: namecontroller,
                             decoration: const InputDecoration(
                               border: InputBorder.none,
-                              hintText: "Name",
+                              hintText: "الاسم",
                               hintStyle: TextStyle(
                                 color: Color(0xFFb2b7bf),
                                 fontSize: 18.0,
@@ -124,7 +131,7 @@ class _SignUpState extends State<SignUp> {
                             controller: mailcontroller,
                             decoration: const InputDecoration(
                               border: InputBorder.none,
-                              hintText: "Email",
+                              hintText: "البريد الالكتروني",
                               hintStyle: TextStyle(
                                 color: Color(0xFFb2b7bf),
                                 fontSize: 18.0,
@@ -154,7 +161,7 @@ class _SignUpState extends State<SignUp> {
                             controller: passwordcontroller,
                             decoration: const InputDecoration(
                               border: InputBorder.none,
-                              hintText: "Password",
+                              hintText: "كلمه السر",
                               hintStyle: TextStyle(
                                 color: Color(0xFFb2b7bf),
                                 fontSize: 18.0,
@@ -171,16 +178,7 @@ class _SignUpState extends State<SignUp> {
                           height: 30.0,
                         ),
                         GestureDetector(
-                          onTap: () {
-                            if (_formkey.currentState!.validate()) {
-                              setState(() {
-                                email = mailcontroller.text;
-                                name = namecontroller.text;
-                                password = passwordcontroller.text;
-                              });
-                            }
-                            registration();
-                          },
+                          onTap: registration,
                           child: Container(
                             width: double.infinity,
                             padding: const EdgeInsets.symmetric(
@@ -193,11 +191,11 @@ class _SignUpState extends State<SignUp> {
                             ),
                             child: const Center(
                               child: Text(
-                                "Register Now",
+                                "إنشاء حساب",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 22.0,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -208,11 +206,13 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already have an account?",
+                  const Text("هل لديك حساب بالفعل؟",
                       style: TextStyle(
                           color: Color(0xFF8c8e98),
                           fontSize: 18.0,
@@ -228,9 +228,9 @@ class _SignUpState extends State<SignUp> {
                               builder: (context) => const LogIn()));
                     },
                     child: const Text(
-                      "LogIn",
+                      "   سحل دخول الآن",
                       style: TextStyle(
-                          color: Color(0xFF41C8E1),
+                          color: Colors.pink,
                           fontSize: 20.0,
                           fontWeight: FontWeight.w500),
                     ),

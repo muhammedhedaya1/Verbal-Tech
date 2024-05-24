@@ -3,21 +3,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CacheHelper {
   static late SharedPreferences sharedPreferences;
 
-//! Here The Initialize of cache .
+  //! Initialize the cache
   init() async {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-//! this method to put data in local database using key
-
-  String? getDataString({
-    required String key,
-  }) {
+  //! Get a String value from the cache
+  String? getDataString({required String key}) {
     return sharedPreferences.getString(key);
   }
 
-//! this method to put data in local database using key
-
+  //! Save data in the cache using a key
   Future<bool> saveData({required String key, required dynamic value}) async {
     if (value is bool) {
       return await sharedPreferences.setBool(key, value);
@@ -25,7 +21,6 @@ class CacheHelper {
     if (value is String) {
       return await sharedPreferences.setString(key, value);
     }
-
     if (value is int) {
       return await sharedPreferences.setInt(key, value);
     } else {
@@ -33,33 +28,28 @@ class CacheHelper {
     }
   }
 
-//! this method to get data already saved in local database
-
+  //! Get data already saved in the cache
   dynamic getData({required String key}) {
     return sharedPreferences.get(key);
   }
 
-//! remove data using specific key
-
+  //! Remove data using a specific key
   Future<bool> removeData({required String key}) async {
     return await sharedPreferences.remove(key);
   }
 
-//! this method to check if local database contains {key}
+  //! Check if the cache contains a specific key
   Future<bool> containsKey({required String key}) async {
     return sharedPreferences.containsKey(key);
   }
 
-//! clear all data in the local database
+  //! Clear all data in the cache
   Future<bool> clearData() async {
     return await sharedPreferences.clear();
   }
 
-//! this method to put data in local database using key
-  Future<dynamic> put({
-    required String key,
-    required dynamic value,
-  }) async {
+  //! Save data in the cache using a key
+  Future<dynamic> put({required String key, required dynamic value}) async {
     if (value is String) {
       return await sharedPreferences.setString(key, value);
     } else if (value is bool) {
@@ -67,5 +57,10 @@ class CacheHelper {
     } else {
       return await sharedPreferences.setInt(key, value);
     }
+  }
+
+  //! Check if the user is logged in
+  bool isLoggedIn() {
+    return sharedPreferences.getBool('isLoggedIn') ?? false;
   }
 }
