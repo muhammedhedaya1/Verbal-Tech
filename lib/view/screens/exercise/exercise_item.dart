@@ -27,7 +27,7 @@ class ExerciseItem extends StatelessWidget {
             backgroundColor: Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
-            label: 'Delete',
+            label: 'حذف',
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(12),
               bottomLeft: Radius.circular(12),
@@ -85,7 +85,7 @@ class ExerciseItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12)),
                   child: task.isDone
                       ? Text(
-                    "Done!",
+                    "تم!",
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   )
                       : Icon(

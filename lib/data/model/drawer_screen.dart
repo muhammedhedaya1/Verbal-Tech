@@ -31,7 +31,7 @@ class MyDrawer extends StatelessWidget {
                   height: 100,
                 ),
                 const Text(
-                  'Help Me Talk App',
+                  'Verbal Tech',
                   style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black),
                 ),
               ],
@@ -45,7 +45,7 @@ class MyDrawer extends StatelessWidget {
               'شارك التطبيق',
             ),
             onTap: () {
-              Share.share('''*Help Me Talk*\n
+              Share.share('''*Verbal Tech*\n
 This App Develop By :Eng "Mohammed Hedaya",Mohammed Kafi,Ahmed Mahrous,Khaled Saber''');
               Navigator.pop(context);
             },

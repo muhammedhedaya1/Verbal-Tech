@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:help_me_talk/view/home/tabs/main_screen.dart';
 import 'package:help_me_talk/view/home/tabs/process.dart';
 import 'package:help_me_talk/view/home/tabs/profile.dart';
 import 'package:help_me_talk/view/home/tabs/reports.dart';
-import 'package:help_me_talk/view/screens/auth/loginfordoctor.dart';
 import 'package:help_me_talk/view/screens/exercise/add_task_bottom_sheet.dart';
 import '../../data/model/drawer_screen.dart';
 
@@ -47,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         title: const Center(
           child: Text(
-            'Help Me Talk',
+            'Verbal Tech',
             style: TextStyle(color: Colors.blue),
           ),
         ),

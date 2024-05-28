@@ -35,12 +35,12 @@ class ChoiseScreenForLoginOrSignUp extends StatelessWidget {
                   child: Column(
                     children: [
                       Image.asset(
-                        'assets/images/Doctor.png',
+                        'assets/images/Patient.png',
                         width: 250,
                         height: 250,
                       ),
                       const Text(
-                        'دكتور',
+                        'ولي امر',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
@@ -57,12 +57,12 @@ class ChoiseScreenForLoginOrSignUp extends StatelessWidget {
                   child: Column(
                     children: [
                       Image.asset(
-                        'assets/images/Patient.png',
+                        'assets/images/Doctor.png',
                         width: 250,
                         height: 250,
                       ),
                       const Text(
-                        'ولي امر',
+                        'دكتور',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),

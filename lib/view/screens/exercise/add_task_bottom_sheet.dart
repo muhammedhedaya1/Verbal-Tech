@@ -112,15 +112,15 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text("Successfully"),
-                    content: Text("Tasks Add To Firebase"),
+                    title: Text("تم"),
+                    content: Text("نم اضافه التمرين بنجاح"),
                     actions: [
                       ElevatedButton(
                         onPressed: () {
                           Navigator.pop(context);
                           Navigator.pop(context);
                         },
-                        child: Text("Thanks"),
+                        child: Text("شكرا لك"),
                       ),
                     ],
                   );
