@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_me_talk/view/home/tabs/chat.dart';
 import 'package:help_me_talk/view/home/tips_screen.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -62,6 +63,17 @@ This App Develop By :Eng "Mohammed Hedaya",Mohammed Kafi,Ahmed Mahrous,Khaled Sa
                   MaterialPageRoute(builder: (context) =>  TipsScreen()));
             },
           ),
+          ListTile(
+            leading: Icon(Icons.chat),
+            title: Text(
+              "تواصل مع الدكتور"
+            ),
+            onTap: (){
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) =>  ParentChatScreen()));
+            },
+          )
         ],
       ),
     );

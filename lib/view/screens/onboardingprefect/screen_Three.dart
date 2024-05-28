@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:help_me_talk/core/cache_helper.dart';
-import 'package:help_me_talk/view/screens/auth/choisescreenforloginorsignup.dart';
+import 'package:help_me_talk/view/screens/auth/loginforparent.dart';
 import 'package:help_me_talk/view/screens/onboardingprefect/components/slanding_clipper.dart';
 import '../constantforonboarding/constants.dart';
 
@@ -118,7 +118,7 @@ class OnboardingScreenThree extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => ChoiseScreenForLoginOrSignUp(),
+                        builder: (_) => LoginForParent(),
                       ),
                     );
                   },

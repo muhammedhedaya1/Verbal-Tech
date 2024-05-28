@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:help_me_talk/view/screens/auth/loginfordoctor.dart';
+import 'package:help_me_talk/view/screens/auth/loginforparent.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key});
@@ -39,7 +39,7 @@ class _SignUpState extends State<SignUp> {
         ),
       );
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const LogIn()));
+          context, MaterialPageRoute(builder: (context) => const LoginForParent()));
     } on FirebaseAuthException catch (e) {
       String errorMessage = "An error occurred. Please try again.";
       if (e.code == 'weak-password') {
@@ -225,7 +225,7 @@ class _SignUpState extends State<SignUp> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LogIn()));
+                              builder: (context) => const LoginForParent()));
                     },
                     child: const Text(
                       "   سحل دخول الآن",

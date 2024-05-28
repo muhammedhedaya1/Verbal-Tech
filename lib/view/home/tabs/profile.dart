@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:help_me_talk/core/services/auth.dart';
-import 'package:help_me_talk/view/screens/auth/loginfordoctor.dart';
+import 'package:help_me_talk/view/screens/auth/loginforparent.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -90,7 +90,7 @@ class ProfileScreen extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LogIn(),
+                        builder: (context) => LoginForParent(),
                       ),
                     );
                   },

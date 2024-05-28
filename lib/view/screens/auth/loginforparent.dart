@@ -2,18 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:help_me_talk/core/services/auth.dart';
 import 'package:help_me_talk/view/home/homescreen.dart';
-import 'package:help_me_talk/view/screens/auth/signupfordoctor.dart';
+import 'package:help_me_talk/view/screens/auth/signupforparent.dart';
 import 'forgetpasswordfordoctor.dart';
 
-class LogIn extends StatefulWidget {
+class LoginForParent extends StatefulWidget {
 
-  const LogIn({Key? key}) : super(key: key);
+  const LoginForParent({Key? key}) : super(key: key);
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<LoginForParent> createState() => _LoginForParentState();
 }
 
-class _LogInState extends State<LogIn> {
+class _LoginForParentState extends State<LoginForParent> {
   String email = "";
   String password = "";
 

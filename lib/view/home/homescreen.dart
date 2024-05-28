@@ -30,18 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
       extendBody: true,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        // actions: [
-        //   IconButton(
-        //     onPressed: () {
-        //       FirebaseAuth.instance.signOut();
-        //       Navigator.pushReplacement(
-        //         context,
-        //         MaterialPageRoute(builder: (context) => LogIn()),
-        //       );
-        //     },
-        //     icon: Icon(Icons.logout),
-        //   ),
-        // ],
         backgroundColor: Colors.white,
         title: const Center(
           child: Text(

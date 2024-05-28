@@ -7,7 +7,7 @@ import 'package:help_me_talk/core/shared/network/firebase/firebase_notifications
 import 'package:help_me_talk/firebase_options.dart';
 import 'package:help_me_talk/routes.dart';
 import 'package:help_me_talk/view/home/homescreen.dart';
-import 'package:help_me_talk/view/screens/auth/choisescreenforloginorsignup.dart';
+import 'package:help_me_talk/view/screens/auth/loginforparent.dart';
 import 'package:help_me_talk/view/screens/onboardingprefect/screen_one.dart';
 
 Future<void> main() async {
@@ -29,15 +29,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isLoggedIn = CacheHelper().isLoggedIn();
-    bool isOnBoardingVisited = CacheHelper().getData(key: "isOnBoardingVisited") ?? false;
+    bool isOnBoardingVisited =
+        CacheHelper().getData(key: "isOnBoardingVisited") ?? false;
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: isLoggedIn
-          ? ChoiseScreenForLoginOrSignUp()
-          : (isOnBoardingVisited
-          ? HomeScreen()
-          : OnboardingScreenOne()),
+          ? LoginForParent()
+          : (isOnBoardingVisited ? HomeScreen() : OnboardingScreenOne()),
       routes: routes,
     );
   }
