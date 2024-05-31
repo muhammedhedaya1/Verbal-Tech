@@ -12,7 +12,14 @@ class ExerciseDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('تفاصيل التمرين'),
+        iconTheme: IconThemeData(
+          color: Colors.blueAccent, // Change the back arrow color
+        ),
+        title: Text(
+          'تفاصيل التمرين',
+          style: TextStyle(color: Colors.blueAccent), // Change the title color
+        ),
+        backgroundColor: Colors.white,
       ),
       body: FutureBuilder<DocumentSnapshot>(
         future: _firestore.collection('exercises').doc(exerciseId).get(),
@@ -27,24 +34,77 @@ class ExerciseDetailsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('عنوان: ${exercise['title']}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Center(
+                  child: Text(
+                    ' التمرين: ${exercise['title']}',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+                  ),
+                ),
                 SizedBox(height: 20),
-                Text('وصف: ${exercise['description']}', style: TextStyle(fontSize: 16)),
+                Center(
+                  child: Text(
+                    'المطلوب: ${exercise['description']}',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black87),
+                  ),
+                ),
                 SizedBox(height: 20),
                 exercise['imageUrl'] != null
-                    ? Image.network(exercise['imageUrl'])
+                    ? Center(
+                  child: ClipOval(
+                    child: Image.network(
+                      exercise['imageUrl'],
+                      width: 150,
+                      height: 150,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
                     : SizedBox.shrink(),
                 SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RecordResponseScreen(exerciseId),
+                Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RecordResponseScreen(exerciseId),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 10.0,
                       ),
-                    );
-                  },
-                  child: Text('تسجيل رد'),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF41C8E1),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.keyboard_voice_rounded,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "يمكنك تسجيل ردك الان",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

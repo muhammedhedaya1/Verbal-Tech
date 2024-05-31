@@ -21,6 +21,7 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
   String? _filePath;
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -70,7 +71,15 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
     if (_filePath == null) return;
     File file = File(_filePath!);
 
+    setState(() {
+      _isLoading = true;
+    });
+
     String? audioUrl = await _uploadResponse(file);
+
+    setState(() {
+      _isLoading = false;
+    });
 
     if (audioUrl == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -109,14 +118,62 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            ElevatedButton(
+            Center(
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/images/start recording.jpg',
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            if (_isRecording) ...[
+              Icon(
+                Icons.mic,
+                size: 80,
+                color: Colors.red,
+              ),
+              SizedBox(height: 10),
+              Text('جاري التسجيل...', style: TextStyle(fontSize: 18, color: Colors.red)),
+            ] else ...[
+              Icon(
+                Icons.mic_none,
+                size: 80,
+                color: Colors.black54,
+              ),
+              SizedBox(height: 10),
+              Text('اضغط على الميكروفون لبدء التسجيل', style: TextStyle(fontSize: 18, color: Colors.black54)),
+            ],
+            SizedBox(height: 20),
+            ElevatedButton.icon(
               onPressed: _isRecording ? _stopRecording : _startRecording,
-              child: Text(_isRecording ? 'إيقاف التسجيل' : 'بدء التسجيل'),
+              icon: Icon(_isRecording ? Icons.stop : Icons.mic),
+              label: Text(_isRecording ? 'إيقاف التسجيل' : 'بدء التسجيل'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: _isRecording ? Colors.red : Colors.blueAccent,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: _sendResponse,
-              child: Text('إرسال الرد'),
+              child: _isLoading
+                  ? CircularProgressIndicator(color: Colors.white)
+                  : Text('إرسال الرد'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueAccent,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              ),
             ),
           ],
         ),

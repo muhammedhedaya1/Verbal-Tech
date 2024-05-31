@@ -56,7 +56,7 @@ class _CategoriesFieldsState extends State<CategoriesFields> {
                         builder: (context) => ParentChatScreen(),
                       ),
                     );
-                  } else if (categories[index].title == "التخاطب") {
+                  } else if (categories[index].title == "التمارين الوارده") {
                     Navigator.push(
                       context,
                       MaterialPageRoute(

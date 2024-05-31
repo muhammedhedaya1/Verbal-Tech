@@ -9,7 +9,37 @@ class ExercisesListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('التمارين'),
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.blue),
+        title: Center(child: Text('التمارين',style: TextStyle(color: Colors.blue),)),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.delete,color: Colors.blue,),
+            onPressed: () async {
+              bool confirm = await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text('تأكيد'),
+                  content: Text('هل أنت متأكد أنك تريد مسح كل التمارين؟'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(false),
+                      child: Text('لا'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(true),
+                      child: Text('نعم'),
+                    ),
+                  ],
+                ),
+              );
+
+              if (confirm) {
+                await _deleteAllExercises();
+              }
+            },
+          ),
+        ],
       ),
       body: StreamBuilder(
         stream: _firestore.collection('exercises').snapshots(),
@@ -25,8 +55,11 @@ class ExercisesListScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               var exercise = exercises[index];
               return ListTile(
-                title: Text(exercise['title']),
-                subtitle: Text(exercise['description']),
+                leading: CircleAvatar(
+                  child: Text((index + 1).toString()),
+                ),
+                title: Text('التمرين ${index + 1}'),
+                trailing: Icon(Icons.arrow_forward_ios),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -41,5 +74,13 @@ class ExercisesListScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Future<void> _deleteAllExercises() async {
+    var collection = _firestore.collection('exercises');
+    var snapshots = await collection.get();
+    for (var doc in snapshots.docs) {
+      await doc.reference.delete();
+    }
   }
 }

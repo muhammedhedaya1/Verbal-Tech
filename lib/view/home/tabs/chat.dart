@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class ParentChatScreen extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
   final TextEditingController _controller = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String chatId = 'unique_chat_id'; // يجب أن يكون معرف فريد لكل محادثة
+  final ScrollController _scrollController = ScrollController();
 
   void _sendMessage(String message) {
     if (message.trim().isEmpty) return;
@@ -19,6 +21,13 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
       'timestamp': FieldValue.serverTimestamp(),
     });
     _controller.clear();
+    _scrollToBottom();
+  }
+
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    });
   }
 
   @override
@@ -56,12 +65,22 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
                         return Center(child: CircularProgressIndicator());
                       }
                       var messages = snapshot.data!.docs;
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        if (_scrollController.hasClients) {
+                          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+                        }
+                      });
                       return ListView.builder(
+                        controller: _scrollController,
                         itemCount: messages.length,
                         itemBuilder: (context, index) {
                           var message = messages[index]['message'];
                           var sender = messages[index]['sender'];
+                          var timestamp = messages[index]['timestamp'] as Timestamp?;
                           bool isParent = sender == 'ولي الامر';
+                          var time = timestamp != null
+                              ? DateFormat('hh:mm a').format(timestamp.toDate())
+                              : '';
                           return Container(
                             padding: EdgeInsets.all(8.0),
                             alignment: isParent ? Alignment.centerRight : Alignment.centerLeft,
@@ -82,7 +101,7 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
                                   ),
                                   SizedBox(height: 5.0),
                                   Text(
-                                    sender,
+                                    time,
                                     style: TextStyle(
                                       fontSize: 10.0,
                                       color: isParent ? Colors.white70 : Colors.black54,
