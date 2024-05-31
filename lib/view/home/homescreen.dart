@@ -3,8 +3,7 @@ import 'package:help_me_talk/view/home/tabs/main_screen.dart';
 import 'package:help_me_talk/view/home/tabs/process.dart';
 import 'package:help_me_talk/view/home/tabs/profile.dart';
 import 'package:help_me_talk/view/home/tabs/reports.dart';
-import 'package:help_me_talk/view/screens/exercise/add_task_bottom_sheet.dart';
-import '../../data/model/drawer_screen.dart';
+import 'package:help_me_talk/view/screens/Exercise%20dates/add_task_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -38,9 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      drawer: MyDrawer(
-        onMenuItemClick: (clickedItemPos) {},
-      ),
+      // drawer: MyDrawer(
+      //   onMenuItemClick: (clickedItemPos) {},
+      // ),
       body: tabs[selectedIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(

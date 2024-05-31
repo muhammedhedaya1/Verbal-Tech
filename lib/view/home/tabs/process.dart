@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:help_me_talk/core/shared/network/firebase/firebase_manager.dart';
 import 'package:help_me_talk/data/model/exercise_model/exercise_model.dart';
-import 'package:help_me_talk/view/screens/exercise/exercise_item.dart';
+import 'package:help_me_talk/view/screens/Exercise%20dates/exercise_item.dart';
 
 
 class TasksTab extends StatefulWidget {

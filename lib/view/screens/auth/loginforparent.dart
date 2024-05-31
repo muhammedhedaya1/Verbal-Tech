@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:help_me_talk/core/services/auth.dart';
 import 'package:help_me_talk/view/home/homescreen.dart';
 import 'package:help_me_talk/view/screens/auth/signupforparent.dart';
-import 'forgetpasswordfordoctor.dart';
+import 'forgetpasswordforparent.dart';
 
 class LoginForParent extends StatefulWidget {
 

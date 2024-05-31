@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:help_me_talk/core/constant/color.dart';
 import 'package:help_me_talk/view/home/categories/CategoryWidget.dart';
 import 'package:help_me_talk/view/home/categories/category.dart';
+import 'package:help_me_talk/view/home/tabs/chat.dart';
+import 'package:help_me_talk/view/home/tips_screen.dart';
+import 'package:help_me_talk/view/screens/exerciseList/exercisethedoctorsend.dart';
 
 typedef OnCategoryClick = void Function(Category category);
 
@@ -26,7 +28,7 @@ class _CategoriesFieldsState extends State<CategoriesFields> {
           Center(
             child: const Text(
               "♥🙏 نحن هنا لمساعدتك",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,color: AppColor.blue),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF41C8E1)),
             ),
           ),
           SizedBox(height: 30), // Add space below the text
@@ -40,7 +42,31 @@ class _CategoriesFieldsState extends State<CategoriesFields> {
               ),
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
-                  widget.onCategoryClick(categories[index]);
+                  if (categories[index].title == "نصائح من الاخصائي") {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TipsScreen(),
+                      ),
+                    );
+                  } else if (categories[index].title == "التواصل مع الأخصائي") {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ParentChatScreen(),
+                      ),
+                    );
+                  } else if (categories[index].title == "التخاطب") {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ExercisesListScreen(),
+                      ),
+                    );
+                  }
+                  else {
+                    widget.onCategoryClick(categories[index]);
+                  }
                 },
                 child: CategoryItem(categories[index], index),
               ),

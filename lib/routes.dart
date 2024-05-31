@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:help_me_talk/view/screens/auth/forgetpasswordfordoctor.dart';
+import 'package:help_me_talk/view/screens/auth/forgetpasswordforparent.dart';
 import 'package:help_me_talk/view/screens/auth/loginforparent.dart';
 import 'package:help_me_talk/view/screens/auth/signupforparent.dart';
 import 'core/constant/routes.dart';

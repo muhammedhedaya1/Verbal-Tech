@@ -34,13 +34,11 @@ class TipsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,        iconTheme: IconThemeData(color: Colors.blue), // لون سهم الرجوع
+
         title: Text(
-          "Tips",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.white, // Setting the back arrow color to white
+          "نصائح",
+          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(
