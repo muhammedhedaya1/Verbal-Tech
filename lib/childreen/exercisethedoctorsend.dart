@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:help_me_talk/view/screens/exerciseList/ExerciseDetailsScreen.dart';
+import 'package:help_me_talk/childreen/ExerciseDetailsScreen.dart';
 
 class ExercisesListScreen extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -9,12 +9,17 @@ class ExercisesListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.blue),
-        title: Center(child: Text('التمارين',style: TextStyle(color: Colors.blue),)),
+        backgroundColor: Colors.white, // Set the AppBar background color to white
+        iconTheme: IconThemeData(color: Colors.blue), // Change the icon color
+        title: Center(
+          child: Text(
+            'التمارين',
+            style: TextStyle(color: Colors.blue), // Change the title color
+          ),
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.delete,color: Colors.blue,),
+            icon: Icon(Icons.delete_sweep_rounded, color: Colors.blue),
             onPressed: () async {
               bool confirm = await showDialog(
                 context: context,
@@ -41,6 +46,7 @@ class ExercisesListScreen extends StatelessWidget {
           ),
         ],
       ),
+      backgroundColor: Colors.white, // Set the Scaffold background color to white
       body: StreamBuilder(
         stream: _firestore.collection('exercises').snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -56,10 +62,23 @@ class ExercisesListScreen extends StatelessWidget {
               var exercise = exercises[index];
               return ListTile(
                 leading: CircleAvatar(
-                  child: Text((index + 1).toString()),
+                  backgroundColor: Colors.blue,
+                  child: Text(
+                    (index + 1).toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
-                title: Text('التمرين ${index + 1}'),
-                trailing: Icon(Icons.arrow_forward_ios),
+                title: Text(
+                  'تمرين رقم ',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.blue,
+                ),
                 onTap: () {
                   Navigator.push(
                     context,

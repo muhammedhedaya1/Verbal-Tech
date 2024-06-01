@@ -3,7 +3,6 @@ import 'package:help_me_talk/view/home/tabs/main_screen.dart';
 import 'package:help_me_talk/view/home/tabs/process.dart';
 import 'package:help_me_talk/view/home/tabs/profile.dart';
 import 'package:help_me_talk/view/home/tabs/reports.dart';
-import 'package:help_me_talk/view/screens/Exercise%20dates/add_task_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -41,21 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
       //   onMenuItemClick: (clickedItemPos) {},
       // ),
       body: tabs[selectedIndex],
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue,
-        onPressed: () {
-          showAddTaskBottomSheet();
-        },
-        shape: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(color: Colors.white),
-        ),
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -97,17 +81,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void showAddTaskBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: AddTaskBottomSheet(),
-        );
-      },
-    );
-  }
 }

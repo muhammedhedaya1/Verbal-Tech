@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:help_me_talk/view/home/categories/category.dart';
 
 class CategoryItem extends StatelessWidget {
-  Category category;
-  int index;
+  final Category category;
+  final int index;
 
   CategoryItem(this.category, this.index, {super.key});
 
@@ -23,7 +23,7 @@ class CategoryItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Image.asset(
-            '${category.image!}',
+            category.image!,
             height: 120,
             width: double.infinity,
             fit: BoxFit.fitHeight,
@@ -31,7 +31,7 @@ class CategoryItem extends StatelessWidget {
           Text(
             category.title!,
             style: TextStyle(fontSize: 22, color: Colors.white),
-          )
+          ),
         ],
       ),
     );

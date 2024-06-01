@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:help_me_talk/view/home/categories/CategoryWidget.dart';
 import 'package:help_me_talk/view/home/categories/category.dart';
 import 'package:help_me_talk/view/home/tabs/chat.dart';
+import 'package:help_me_talk/view/home/tabs/process.dart';
 import 'package:help_me_talk/view/home/tips_screen.dart';
-import 'package:help_me_talk/view/screens/exerciseList/exercisethedoctorsend.dart';
+import 'package:help_me_talk/childreen/exercisethedoctorsend.dart';
 
 typedef OnCategoryClick = void Function(Category category);
 
@@ -61,6 +62,13 @@ class _CategoriesFieldsState extends State<CategoriesFields> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ExercisesListScreen(),
+                      ),
+                    );
+                  }else if (categories[index].title == "المواعيد") {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TasksTab(),
                       ),
                     );
                   }

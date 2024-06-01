@@ -95,7 +95,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/appicon1.jpg"
+  image_path: "assets/images/iconapp.jpg"
   # The "flutter_lints" package belowassets/images/appicon.pngins a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

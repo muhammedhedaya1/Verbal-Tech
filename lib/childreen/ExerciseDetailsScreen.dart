@@ -13,14 +13,17 @@ class ExerciseDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Colors.blueAccent, // Change the back arrow color
+          color: Colors.blue, // Change the back arrow color
         ),
-        title: Text(
-          'تفاصيل التمرين',
-          style: TextStyle(color: Colors.blueAccent), // Change the title color
+        title: Center(
+          child: Text(
+            'تفاصيل التمرين',
+            style: TextStyle(color: Colors.blue), // Change the title color
+          ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white, // Set the AppBar background color to white
       ),
+      backgroundColor: Colors.white, // Set the Scaffold background color to white
       body: FutureBuilder<DocumentSnapshot>(
         future: _firestore.collection('exercises').doc(exerciseId).get(),
         builder: (context, snapshot) {
@@ -36,7 +39,7 @@ class ExerciseDetailsScreen extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    ' التمرين: ${exercise['title']}',
+                    'التمرين: ${exercise['title']}',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blueAccent),
                   ),
                 ),
@@ -78,7 +81,7 @@ class ExerciseDetailsScreen extends StatelessWidget {
                         horizontal: 10.0,
                       ),
                       decoration: BoxDecoration(
-                        color: Color(0xFF41C8E1),
+                        color: Colors.blue,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Center(

@@ -68,7 +68,14 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
   }
 
   void _sendResponse() async {
-    if (_filePath == null) return;
+    if (_filePath == null || !File(_filePath!).existsSync()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('You need to record a response before sending.')),
+      );
+      print('File path is null or file does not exist');
+      return;
+    }
+
     File file = File(_filePath!);
 
     setState(() {
@@ -83,7 +90,7 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
 
     if (audioUrl == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('فشل في رفع الرد')),
+        SnackBar(content: Text('Failed to upload the response.')),
       );
       return;
     }
@@ -95,7 +102,7 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('تم إرسال الرد بنجاح')),
+      SnackBar(content: Text('Response sent successfully.')),
     );
 
     Navigator.pop(context);
@@ -111,9 +118,13 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('تسجيل رد'),
+      appBar: AppBar(backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.blue, // Change the back arrow color
+        ),
+        title: Center(child: Text('تسجيل الرد', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold))),
       ),
+      backgroundColor: Colors.white, // Set the background color to white
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -121,9 +132,9 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
             Center(
               child: ClipOval(
                 child: Image.asset(
-                  'assets/images/start recording.jpg',
-                  width: 200,
-                  height: 200,
+                  'assets/images/childreenrecord.jpg',
+                  width: 250,
+                  height: 250,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -136,7 +147,7 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
                 color: Colors.red,
               ),
               SizedBox(height: 10),
-              Text('جاري التسجيل...', style: TextStyle(fontSize: 18, color: Colors.red)),
+              Text('Recording...', style: TextStyle(fontSize: 18, color: Colors.red)),
             ] else ...[
               Icon(
                 Icons.mic_none,
@@ -144,13 +155,13 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
                 color: Colors.black54,
               ),
               SizedBox(height: 10),
-              Text('اضغط على الميكروفون لبدء التسجيل', style: TextStyle(fontSize: 18, color: Colors.black54)),
+              Text('اضغط هنا لبدء التسجيل', style: TextStyle(fontSize: 18, color: Colors.black54)),
             ],
             SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: _isRecording ? _stopRecording : _startRecording,
               icon: Icon(_isRecording ? Icons.stop : Icons.mic),
-              label: Text(_isRecording ? 'إيقاف التسجيل' : 'بدء التسجيل'),
+              label: Text(_isRecording ? 'ايقاف التسجيل' : 'بدء التسجيل'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: _isRecording ? Colors.red : Colors.blueAccent,
                 foregroundColor: Colors.white,
@@ -161,11 +172,12 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: _sendResponse,
-              child: _isLoading
+              icon: _isLoading
                   ? CircularProgressIndicator(color: Colors.white)
-                  : Text('إرسال الرد'),
+                  : Icon(Icons.send),
+              label: Text('ارسال الرد'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueAccent,
                 foregroundColor: Colors.white,

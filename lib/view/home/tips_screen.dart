@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:help_me_talk/data/model/tips_model.dart';
+import 'package:help_me_talk/data/model/exercise_model/tips_model.dart';
 import 'package:help_me_talk/view/home/tips_details.dart';
 
 class TipsScreen extends StatelessWidget {

@@ -12,26 +12,13 @@ class FirebaseManager {
     );
   }
 
-  static Future<void> addExercise(ExerciseModel exercise) {
-    CollectionReference collection = getCollection();
-    var doc = collection.doc();
-    exercise.id = doc.id;
-    return doc.set(exercise);
-  }
-
-  static Stream<QuerySnapshot<ExerciseModel>> getExercise(DateTime date) {
+  static Stream<QuerySnapshot<ExerciseModel>> getExercises(DateTime date) {
+    int startOfDay = DateUtils.dateOnly(date).millisecondsSinceEpoch;
+    int endOfDay = startOfDay + Duration(days: 1).inMilliseconds;
     return getCollection()
-        .orderBy('date', descending: true)
-        .where('date',
-        isEqualTo: DateUtils.dateOnly(date).millisecondsSinceEpoch)
+        .orderBy('date')
+        .where('date', isGreaterThanOrEqualTo: startOfDay)
+        .where('date', isLessThan: endOfDay)
         .snapshots();
-  }
-
-  static Future<void> deleteExercise(String taskId) {
-    return getCollection().doc(taskId).delete();
-  }
-
-  static void updateExercise(ExerciseModel model) {
-    getCollection().doc(model.id).update(model.toJson());
   }
 }
