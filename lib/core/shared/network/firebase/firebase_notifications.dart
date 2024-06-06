@@ -11,4 +11,3 @@ class FirebaseNotifications {
     print("Token: $token");
   }
 }
-

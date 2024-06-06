@@ -10,11 +10,11 @@ class Category {
  static List<Category> getCategories() {
     return [
       Category(
-          "تقدم طفلي", "assets/images/childprocess.png", Color(0xFF79C6E0)),
+          "تقارير الاطفال", "assets/images/childprocess.png", Color(0xFF79C6E0)),
       Category("نصائح من الاخصائي", "assets/images/family-confirming.png",
           Color(0xFFABE1E0)),
       Category(
-          "الدروس", "assets/images/videolession.png", Color(0xFFABE1E0)),
+          "فيديوهات اون لاين", "assets/images/videolession.png", Color(0xFFABE1E0)),
       // Category("المواعيد", "assets/images/calendar.png", Color(0xFF41C8E1)),
       Category("التواصل مع الأخصائي", "assets/images/mail-part.png",
           Color(0xFF79C6E0)),

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:help_me_talk/view/drawer/mydrawerscreen.dart';
 import 'package:help_me_talk/view/home/tabs/main_screen.dart';
-import 'package:help_me_talk/view/home/tabs/process.dart';
 import 'package:help_me_talk/view/home/tabs/profile.dart';
-import 'package:help_me_talk/view/home/tabs/reports.dart';
+import 'package:help_me_talk/view/home/tabs/AddChildScreen.dart';
 
 class HomeScreen extends StatefulWidget {
-
-
   const HomeScreen({super.key});
 
   @override
@@ -16,10 +14,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   List<Widget> tabs = [
-    const MainScreen(),
-    TasksTab(),
-    const ReportsScreen(),
-     ProfileScreen()
+    MainScreen(),
+    AddChildScreen(),
+    ProfileScreen(),
   ];
 
   @override
@@ -32,13 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Center(
           child: Text(
             'Verbal Tech',
-            style: TextStyle(color: Colors.blue),
+            style: TextStyle(color: Colors.pink),
           ),
         ),
       ),
-      // drawer: MyDrawer(
-      //   onMenuItemClick: (clickedItemPos) {},
-      // ),
+      drawer: MyDrawerScreen(),
       body: tabs[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.transparent,
@@ -59,26 +54,15 @@ class _HomeScreenState extends State<HomeScreen> {
             label: "",
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/proccesing.png'),
-            ),
+            icon: Icon(Icons.child_care),
             label: "",
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/increase.png'),
-            ),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/profilepage.png'),
-            ),
+            icon: Icon(Icons.person),
             label: "",
           ),
         ],
       ),
     );
   }
-
 }

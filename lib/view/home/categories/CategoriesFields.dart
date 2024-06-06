@@ -3,6 +3,7 @@ import 'package:help_me_talk/view/home/categories/CategoryWidget.dart';
 import 'package:help_me_talk/view/home/categories/category.dart';
 import 'package:help_me_talk/view/home/tabs/chat.dart';
 import 'package:help_me_talk/view/home/tabs/process.dart';
+import 'package:help_me_talk/view/screens/online_videos/videos.dart';
 import 'package:help_me_talk/view/home/tips_screen.dart';
 import 'package:help_me_talk/childreen/exercisethedoctorsend.dart';
 
@@ -21,21 +22,22 @@ class _CategoriesFieldsState extends State<CategoriesFields> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        children: [
-          SizedBox(height: 20), // Add space above the text
-          Center(
-            child: const Text(
-              "♥🙏 نحن هنا لمساعدتك",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF41C8E1)),
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            SizedBox(height: 20), // Add space above the text
+            Center(
+              child: const Text(
+                "🙏 نحن هنا لمساعدتك",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF41C8E1)),
+              ),
             ),
-          ),
-          SizedBox(height: 30), // Add space below the text
-          SizedBox(
-            height: 700, // Provide a specific height
-            child: GridView.builder(
+            SizedBox(height: 30), // Add space below the text
+            GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 24,
@@ -64,13 +66,27 @@ class _CategoriesFieldsState extends State<CategoriesFields> {
                         builder: (context) => ExercisesListScreen(),
                       ),
                     );
-                  }else if (categories[index].title == "المواعيد") {
+                  } else if (categories[index].title == "المواعيد") {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => TasksTab(),
                       ),
                     );
+                  } else if (categories[index].title == "فيديوهات اون لاين") {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VideoGridView(),
+                      ),
+                    );
+                  }else if (categories[index].title == "تقارير الاطفال") {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => ParentReportScreen(childName: "",),
+                    //   ),
+                    // );
                   }
                   else {
                     widget.onCategoryClick(categories[index]);
@@ -80,8 +96,8 @@ class _CategoriesFieldsState extends State<CategoriesFields> {
               ),
               itemCount: categories.length,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:help_me_talk/view/home/categories/CategoriesFields.dart';
+import 'package:help_me_talk/view/home/categories/CategoryWidget.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CategoriesFields((category) {
-          // Handle category click here
-        }),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(12),
+            child: CategoriesFields((category) {
+              // Handle category click
+            }),
+          ),
+        ],
+      ),
     );
   }
 }

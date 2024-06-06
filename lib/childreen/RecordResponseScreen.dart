@@ -90,7 +90,7 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
 
     if (audioUrl == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to upload the response.')),
+        SnackBar(content: Text('فشل في ارسال الرد.')),
       );
       return;
     }
@@ -102,7 +102,7 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Response sent successfully.')),
+      SnackBar(content: Text('تم ارسال الرد بنجاح.')),
     );
 
     Navigator.pop(context);
@@ -147,7 +147,7 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
                 color: Colors.red,
               ),
               SizedBox(height: 10),
-              Text('Recording...', style: TextStyle(fontSize: 18, color: Colors.red)),
+              Text('جاري التسجيل...', style: TextStyle(fontSize: 18, color: Colors.red)),
             ] else ...[
               Icon(
                 Icons.mic_none,
@@ -177,7 +177,7 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
               icon: _isLoading
                   ? CircularProgressIndicator(color: Colors.white)
                   : Icon(Icons.send),
-              label: Text('ارسال الرد'),
+              label: Text('ارسال الي الاخصائي'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueAccent,
                 foregroundColor: Colors.white,

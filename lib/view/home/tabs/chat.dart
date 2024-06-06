@@ -24,17 +24,61 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
     _scrollToBottom();
   }
 
+  void _deleteMessage(String messageId, {bool deleteForBoth = false}) {
+    if (deleteForBoth) {
+      _firestore.collection('chats').doc(chatId).collection('messages').doc(messageId).delete();
+    } else {
+      _firestore.collection('chats').doc(chatId).collection('messages').doc(messageId).update({'deletedByParent': true});
+    }
+  }
+
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      if (_scrollController.hasClients) {
+        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      }
     });
+  }
+
+  void _showDeleteOptions(String messageId) {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.delete_outline, color: Colors.red),
+                title: Text('حذف لدي'),
+                onTap: () {
+                  _deleteMessage(messageId, deleteForBoth: false);
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.delete_forever, color: Colors.red),
+                title: Text('حذف لدي الطرفين'),
+                onTap: () {
+                  _deleteMessage(messageId, deleteForBoth: true);
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Parent Chat', style: TextStyle(color: Colors.blue))),
+        title: Center(child: Text('مراسله الاخصائي', style: TextStyle(color: Colors.blue))),
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.blue), // لون سهم الرجوع
       ),
@@ -74,40 +118,58 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
                         controller: _scrollController,
                         itemCount: messages.length,
                         itemBuilder: (context, index) {
-                          var message = messages[index]['message'];
-                          var sender = messages[index]['sender'];
-                          var timestamp = messages[index]['timestamp'] as Timestamp?;
+                          var messageId = messages[index].id;
+                          var messageData = messages[index].data() as Map<String, dynamic>;
+                          var message = messageData['message'];
+                          var sender = messageData['sender'];
+                          var deletedByParent = messageData['deletedByParent'] ?? false;
+                          var timestamp = messageData['timestamp'] as Timestamp?;
                           bool isParent = sender == 'ولي الامر';
-                          var time = timestamp != null
-                              ? DateFormat('hh:mm a').format(timestamp.toDate())
-                              : '';
-                          return Container(
-                            padding: EdgeInsets.all(8.0),
-                            alignment: isParent ? Alignment.centerRight : Alignment.centerLeft,
+                          var time = timestamp != null ? DateFormat('hh:mm a').format(timestamp.toDate()) : '';
+
+                          if (deletedByParent && isParent) {
+                            message = 'تم حذف الرسالة';
+                          }
+
+                          return GestureDetector(
+                            onLongPress: () => _showDeleteOptions(messageId),
                             child: Container(
-                              decoration: BoxDecoration(
-                                color: isParent ? Colors.green : Colors.grey[300],
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              padding: EdgeInsets.all(10.0),
-                              child: Column(
-                                crossAxisAlignment: isParent ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    message,
-                                    style: TextStyle(
-                                      color: isParent ? Colors.white : Colors.black,
+                              padding: EdgeInsets.all(8.0),
+                              alignment: isParent ? Alignment.centerRight : Alignment.centerLeft,
+                              child: FractionallySizedBox(
+                                widthFactor: 0.7, // تحديد عرض الرسالة إلى 70% من عرض الشاشة
+                                child: Card(
+                                  color: isParent ? Colors.green : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  elevation: 2.0,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Column(
+                                      crossAxisAlignment: isParent ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          message,
+                                          style: TextStyle(
+                                            color: isParent ? Colors.white : Colors.black,
+                                          ),
+                                        ),
+                                        SizedBox(height: 5.0),
+                                        Align(
+                                          alignment: isParent ? Alignment.bottomLeft : Alignment.bottomRight,
+                                          child: Text(
+                                            time,
+                                            style: TextStyle(
+                                              fontSize: 10.0,
+                                              color: isParent ? Colors.white70 : Colors.black54,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  SizedBox(height: 5.0),
-                                  Text(
-                                    time,
-                                    style: TextStyle(
-                                      fontSize: 10.0,
-                                      color: isParent ? Colors.white70 : Colors.black54,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           );

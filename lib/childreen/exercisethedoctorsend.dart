@@ -48,7 +48,7 @@ class ExercisesListScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.white, // Set the Scaffold background color to white
       body: StreamBuilder(
-        stream: _firestore.collection('exercises').snapshots(),
+        stream: _firestore.collection('exercises').orderBy('number').snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
@@ -64,12 +64,12 @@ class ExercisesListScreen extends StatelessWidget {
                 leading: CircleAvatar(
                   backgroundColor: Colors.blue,
                   child: Text(
-                    (index + 1).toString(),
+                    (exercise['number']).toString(),
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
                 title: Text(
-                  'تمرين رقم ',
+                  'تمرين رقم ${exercise['number']}',
                   style: TextStyle(
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
