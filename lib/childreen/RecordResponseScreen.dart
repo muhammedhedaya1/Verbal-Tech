@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RecordResponseScreen extends StatefulWidget {
   final String exerciseId;
@@ -117,47 +118,53 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: Size(360, 690), minTextAdapt: true, splitScreenMode: true);
+
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.white,
+      appBar: AppBar(centerTitle: true,
+        backgroundColor: Colors.white,
         iconTheme: IconThemeData(
           color: Colors.blue, // Change the back arrow color
         ),
-        title: Center(child: Text('تسجيل الرد', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold))),
+        title: Text(
+          'تسجيل الرد',
+          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 18.sp),
+        ),
       ),
       backgroundColor: Colors.white, // Set the background color to white
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           children: <Widget>[
             Center(
               child: ClipOval(
                 child: Image.asset(
                   'assets/images/childreenrecord.jpg',
-                  width: 250,
-                  height: 250,
+                  width: 250.w,
+                  height: 250.h,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
             if (_isRecording) ...[
               Icon(
                 Icons.mic,
-                size: 80,
+                size: 80.sp,
                 color: Colors.red,
               ),
-              SizedBox(height: 10),
-              Text('جاري التسجيل...', style: TextStyle(fontSize: 18, color: Colors.red)),
+              SizedBox(height: 10.h),
+              Text('جاري التسجيل...', style: TextStyle(fontSize: 18.sp, color: Colors.red)),
             ] else ...[
               Icon(
                 Icons.mic_none,
-                size: 80,
+                size: 80.sp,
                 color: Colors.black54,
               ),
-              SizedBox(height: 10),
-              Text('اضغط هنا لبدء التسجيل', style: TextStyle(fontSize: 18, color: Colors.black54)),
+              SizedBox(height: 10.h),
+              Text('اضغط هنا لبدء التسجيل', style: TextStyle(fontSize: 18.sp, color: Colors.black54)),
             ],
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
             ElevatedButton.icon(
               onPressed: _isRecording ? _stopRecording : _startRecording,
               icon: Icon(_isRecording ? Icons.stop : Icons.mic),
@@ -166,12 +173,12 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
                 backgroundColor: _isRecording ? Colors.red : Colors.blueAccent,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
             ElevatedButton.icon(
               onPressed: _sendResponse,
               icon: _isLoading
@@ -182,9 +189,9 @@ class _RecordResponseScreenState extends State<RecordResponseScreen> {
                 backgroundColor: Colors.blueAccent,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
               ),
             ),
           ],

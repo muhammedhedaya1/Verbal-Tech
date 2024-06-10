@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:help_me_talk/core/services/auth.dart';
 import 'package:help_me_talk/view/home/homescreen.dart';
 import 'package:help_me_talk/view/screens/auth/signupforparent.dart';
 import 'forgetpasswordforparent.dart';
 
 class LoginForParent extends StatefulWidget {
-
   const LoginForParent({Key? key}) : super(key: key);
 
   @override
@@ -54,7 +56,7 @@ class _LoginForParentState extends State<LoginForParent> {
         backgroundColor: Colors.orangeAccent,
         content: Text(
           errorMessage,
-          style: TextStyle(fontSize: 18.0),
+          style: TextStyle(fontSize: 14.sp),
         ),
       ));
     }
@@ -62,39 +64,42 @@ class _LoginForParentState extends State<LoginForParent> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(360, 690), minTextAdapt: true, splitScreenMode: true);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 50.0),
+          padding: EdgeInsets.symmetric(vertical: 40.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
                 child: Container(
-                  width: 300,
-                  height: 300,
-                  child: Image.asset(
-                    "assets/images/Patient.png",
+                  width: 250.w,
+                  height: 250.h,
+                  child: SvgPicture.asset(
+                    "assets/images/Patient.svg",
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              SizedBox(height: 30.0),
+              SizedBox(height: 20.h),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     children: [
                       Container(
                         padding: EdgeInsets.symmetric(
-                          vertical: 2.0,
-                          horizontal: 30.0,
+                          vertical: 2.h,
+                          horizontal: 20.w,
                         ),
                         decoration: BoxDecoration(
                           color: Color(0xFFedf0f8),
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(20.r),
                         ),
                         child: TextFormField(
                           controller: mailController,
@@ -109,20 +114,20 @@ class _LoginForParentState extends State<LoginForParent> {
                             hintText: "البريد الالكتروني",
                             hintStyle: TextStyle(
                               color: Colors.grey,
-                              fontSize: 18.0,
+                              fontSize: 14.sp,
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 30.0),
+                      SizedBox(height: 20.h),
                       Container(
                         padding: EdgeInsets.symmetric(
-                          vertical: 2.0,
-                          horizontal: 30.0,
+                          vertical: 2.h,
+                          horizontal: 20.w,
                         ),
                         decoration: BoxDecoration(
                           color: Color(0xFFedf0f8),
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(20.r),
                         ),
                         child: TextFormField(
                           controller: passwordController,
@@ -137,31 +142,31 @@ class _LoginForParentState extends State<LoginForParent> {
                             hintText: "كلمه المرور",
                             hintStyle: TextStyle(
                               color: Colors.grey,
-                              fontSize: 18.0,
+                              fontSize: 14.sp,
                             ),
                           ),
                           obscureText: true,
                         ),
                       ),
-                      SizedBox(height: 30.0),
+                      SizedBox(height: 20.h),
                       GestureDetector(
                         onTap: userLogin,
                         child: Container(
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.symmetric(
-                            vertical: 13.0,
-                            horizontal: 30.0,
+                            vertical: 12.h,
+                            horizontal: 20.w,
                           ),
                           decoration: BoxDecoration(
                             color: Color(0xFF41C8E1),
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(20.r),
                           ),
                           child: Center(
                             child: Text(
                               "الدخول",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 22.0,
+                                fontSize: 18.sp,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -172,7 +177,7 @@ class _LoginForParentState extends State<LoginForParent> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: 20.h),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -186,21 +191,36 @@ class _LoginForParentState extends State<LoginForParent> {
                   "هل نسيت كلمه المرور؟",
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 18.0,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
-              SizedBox(height: 40.0),
-              Text(
-                "تسجيل الدخول بواسطة جوجل",
-                style: TextStyle(
-                  color: Color(0xFF41C8E1),
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.w500,
-                ),
+              SizedBox(height: 30.h),
+              Stack(
+                children: [
+                  Divider(
+                    thickness: 2,
+                    color: Colors.blue,
+                    indent: 20.w,
+                    endIndent: 20.w,
+                  ),
+                  Center(
+                    child: Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      child: Text(
+                        "or",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 30.0),
+              SizedBox(height: 20.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -209,15 +229,31 @@ class _LoginForParentState extends State<LoginForParent> {
                       AuthService().signInWithGoogle(context);
                     },
                     child: Image.asset(
-                      "assets/images/googleicon.png",
-                      height: 45,
-                      width: 45,
+                      "assets/images/google.jpg",
+                      height: 40.h,
+                      width: 40.w,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: 20.h),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUp()),
+                  );
+                },
+                child: Text(
+                  "قم بإنشاء حساب الآن",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -225,25 +261,8 @@ class _LoginForParentState extends State<LoginForParent> {
                     "ليس لديك حساب؟",
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 18.0,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(width: 20.0),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignUp()),
-                      );
-                    },
-                    child: Text(
-                      "قم بإنشاء حساب الآن",
-                      style: TextStyle(
-                        color: Colors.pink,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w500,
-                      ),
                     ),
                   ),
                 ],

@@ -36,17 +36,17 @@ class _AddChildScreenState extends State<AddChildScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,
-        designSize: Size(375, 812), minTextAdapt: true, splitScreenMode: true);
+    ScreenUtil.init(context, designSize: Size(375, 812), minTextAdapt: true, splitScreenMode: true);
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
+      appBar: AppBar(automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Center(
           child: Text(
-            'يرجي ادخال البيانات الخاصه بطفلك',
+            'يرجى إدخال البيانات الخاصة بطفلك',
             textAlign: TextAlign.right,
+            style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 20.sp),
           ),
         ),
       ),
@@ -61,14 +61,12 @@ class _AddChildScreenState extends State<AddChildScreen> {
                   decoration: InputDecoration(
                     labelText: 'الاسم',
                     alignLabelWithHint: true,
-                    labelStyle: TextStyle(
-                      fontSize: 16.sp,
-                    ),
+                    labelStyle: TextStyle(fontSize: 16.sp),
                   ),
                   textDirection: TextDirection.rtl,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'من فضلك ادخل الاسم';
+                      return 'من فضلك أدخل الاسم';
                     }
                     return null;
                   },
@@ -81,15 +79,13 @@ class _AddChildScreenState extends State<AddChildScreen> {
                   decoration: InputDecoration(
                     labelText: 'العمر',
                     alignLabelWithHint: true,
-                    labelStyle: TextStyle(
-                      fontSize: 16.sp,
-                    ),
+                    labelStyle: TextStyle(fontSize: 16.sp),
                   ),
                   textDirection: TextDirection.rtl,
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value!.isEmpty || int.tryParse(value) == null) {
-                      return 'من فضلك ادخل العمر';
+                      return 'من فضلك أدخل العمر';
                     }
                     return null;
                   },
@@ -102,14 +98,12 @@ class _AddChildScreenState extends State<AddChildScreen> {
                   decoration: InputDecoration(
                     labelText: 'العنوان',
                     alignLabelWithHint: true,
-                    labelStyle: TextStyle(
-                      fontSize: 16.sp,
-                    ),
+                    labelStyle: TextStyle(fontSize: 16.sp),
                   ),
                   textDirection: TextDirection.rtl,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'من فضلك ادخل العنوان';
+                      return 'من فضلك أدخل العنوان';
                     }
                     return null;
                   },
@@ -120,16 +114,14 @@ class _AddChildScreenState extends State<AddChildScreen> {
                 SizedBox(height: 10.h),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'ما المشكله التي يعاني منها الطفل تحديدا',
+                    labelText: 'ما المشكلة التي يعاني منها الطفل تحديداً',
                     alignLabelWithHint: true,
-                    labelStyle: TextStyle(
-                      fontSize: 16.sp,
-                    ),
+                    labelStyle: TextStyle(fontSize: 16.sp),
                   ),
                   textDirection: TextDirection.rtl,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'من فضلك ادخل مشكله طفلك';
+                      return 'من فضلك أدخل مشكلة طفلك';
                     }
                     return null;
                   },
@@ -140,13 +132,12 @@ class _AddChildScreenState extends State<AddChildScreen> {
                 SizedBox(height: 20.h),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.pink, // background
-                    foregroundColor: Colors.white, // foreground
-                    fixedSize: Size(MediaQuery.of(context).size.width,
-                        50), // حدد الارتفاع حسب رغبتك
+                    backgroundColor: Colors.pink,
+                    foregroundColor: Colors.white,
+                    fixedSize: Size(MediaQuery.of(context).size.width, 50.h),
                   ),
                   onPressed: _submitData,
-                  child: Text('ارسال'),
+                  child: Text('إرسال'),
                 ),
               ],
             ),

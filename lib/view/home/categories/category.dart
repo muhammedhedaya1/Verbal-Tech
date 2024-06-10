@@ -7,19 +7,14 @@ class Category {
 
   Category(this.title, this.image, this.color);
 
- static List<Category> getCategories() {
+  static List<Category> getCategories() {
     return [
-      Category(
-          "تقارير الاطفال", "assets/images/childprocess.png", Color(0xFF79C6E0)),
-      Category("نصائح من الاخصائي", "assets/images/family-confirming.png",
-          Color(0xFFABE1E0)),
-      Category(
-          "فيديوهات اون لاين", "assets/images/videolession.png", Color(0xFFABE1E0)),
-      // Category("المواعيد", "assets/images/calendar.png", Color(0xFF41C8E1)),
-      Category("التواصل مع الأخصائي", "assets/images/mail-part.png",
-          Color(0xFF79C6E0)),
-      Category("التمارين الوارده", "assets/images/question.png", Color(0xFF79C6E0)),
-      Category("المواعيد", "assets/images/calendar.png", Color(0xFFABE1E0)),
+      Category("مساعدك الشخصي", "assets/images/ai.webp", Color(0xFF79C6E0)),
+      Category("نصائح من الاخصائي", "assets/images/coolinfo.svg", Color(0xFF7FF5E2)),
+      Category("فيديوهات اون لاين", "assets/images/25_Video Lession.svg", Color(0xFFABE1E0)),
+      Category("التواصل مع الأخصائي", "assets/images/chat.svg", Color(0xFF79C6E0)),
+      Category("التمارين الوارده", "assets/images/exercise.svg", Color(0xFFB7C4CF)),
+      Category("المواعيد", "assets/images/calendar-svgrepo-com.svg", Color(0xFF41C8E1)),
     ];
   }
 }

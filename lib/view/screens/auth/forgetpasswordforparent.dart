@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:help_me_talk/view/screens/auth/signupforparent.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -53,43 +55,41 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const SizedBox(
-            height: 70.0,
-          ),
+          SizedBox(height: 70.h),
           Container(
             alignment: Alignment.topCenter,
-            child: const Text(
+            child: Text(
               "إعادة تعيين كلمة المرور",
               style: TextStyle(
-                  color: Colors.blue,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold),
+                color: Colors.blue,
+                fontSize: 30.sp,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          const Text(
+          SizedBox(height: 10.h),
+          Text(
             "من فضلك ادخل البريد الالكتروني",
             style: TextStyle(
-                color: Colors.blue,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),
+              color: Colors.black,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          SizedBox(height: 20),
-          Image.asset("assets/images/check email.png"),
+          SizedBox(height: 20.h),
+          SvgPicture.asset("assets/images/check email.svg"),
           Expanded(
             child: Form(
               key: _formkey,
               child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
+                padding: EdgeInsets.only(left: 10.w),
                 child: ListView(
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(left: 10.0),
+                      padding: EdgeInsets.only(left: 10.w),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue, width: 2.0),
-                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(color: Colors.blue, width: 2.w),
+                        borderRadius: BorderRadius.circular(30.r),
                       ),
                       child: TextFormField(
                         validator: (value) {
@@ -99,21 +99,19 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           return null;
                         },
                         controller: mailcontroller,
-                        style: const TextStyle(color: Colors.blue),
-                        decoration: const InputDecoration(
-                            hintStyle:
-                                TextStyle(fontSize: 18.0, color: Colors.blue),
-                            suffixIcon: Icon(
-                              Icons.email,
-                              color: Colors.blue,
-                              size: 30.0,
-                            ),
-                            border: InputBorder.none),
+                        style: TextStyle(color: Colors.black),
+                        decoration: InputDecoration(
+                          hintStyle: TextStyle(fontSize: 18.sp, color: Colors.black),
+                          suffixIcon: Icon(
+                            Icons.email,
+                            color: Colors.blue,
+                            size: 30.sp,
+                          ),
+                          border: InputBorder.none,
+                        ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 40.0,
-                    ),
+                    SizedBox(height: 40.h),
                     GestureDetector(
                       onTap: () {
                         if (_formkey.currentState!.validate()) {
@@ -124,52 +122,51 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         }
                       },
                       child: Container(
-                        width: 150,
-                        padding: const EdgeInsets.all(15),
+                        width: 150.w,
+                        padding: EdgeInsets.all(15.h),
                         decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(50)),
-                        child: const Center(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(50.r),
+                        ),
+                        child: Center(
                           child: Text(
                             "افحص البريد الخاص بك",
                             style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold),
+                              color: Colors.white,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 50.0,
-                    ),
+                    SizedBox(height: 30.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           "ليس لديك حساب؟",
-                          style: TextStyle(fontSize: 18.0, color: Colors.blue),
+                          style: TextStyle(fontSize: 18.sp, color: Colors.blue),
                         ),
-                        const SizedBox(
-                          width: 5.0,
-                        ),
+                        SizedBox(width: 5.w),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const SignUp()));
+                              context,
+                              MaterialPageRoute(builder: (context) => const SignUp()),
+                            );
                           },
-                          child: const Text(
+                          child: Text(
                             "   قم بإنشاء حساب الآن",
                             style: TextStyle(
-                                color: Colors.pink,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
+                              color: Colors.black,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

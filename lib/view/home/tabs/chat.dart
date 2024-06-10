@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ParentChatScreen extends StatefulWidget {
   @override
@@ -44,11 +45,11 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
     showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0.r)),
       ),
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0.w),
           child: Wrap(
             children: <Widget>[
               ListTile(
@@ -77,13 +78,13 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text('مراسله الاخصائي', style: TextStyle(color: Colors.blue))),
+      appBar: AppBar(centerTitle:true ,
+        title: Text('مراسله الاخصائي', style: TextStyle(color: Colors.blue)),
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.blue), // لون سهم الرجوع
       ),
       body: ClipRRect(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(30.0)), // حواف دائرية في الجزء العلوي
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.0.r)), // حواف دائرية في الجزء العلوي
         child: Stack(
           children: <Widget>[
             Container(
@@ -134,18 +135,18 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
                           return GestureDetector(
                             onLongPress: () => _showDeleteOptions(messageId),
                             child: Container(
-                              padding: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.0.w),
                               alignment: isParent ? Alignment.centerRight : Alignment.centerLeft,
                               child: FractionallySizedBox(
                                 widthFactor: 0.7, // تحديد عرض الرسالة إلى 70% من عرض الشاشة
                                 child: Card(
                                   color: isParent ? Colors.green : Colors.white,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderRadius: BorderRadius.circular(15.0.r),
                                   ),
                                   elevation: 2.0,
                                   child: Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: EdgeInsets.all(10.0.w),
                                     child: Column(
                                       crossAxisAlignment: isParent ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                                       children: [
@@ -155,13 +156,13 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
                                             color: isParent ? Colors.white : Colors.black,
                                           ),
                                         ),
-                                        SizedBox(height: 5.0),
+                                        SizedBox(height: 5.0.h),
                                         Align(
                                           alignment: isParent ? Alignment.bottomLeft : Alignment.bottomRight,
                                           child: Text(
                                             time,
                                             style: TextStyle(
-                                              fontSize: 10.0,
+                                              fontSize: 10.0.sp,
                                               color: isParent ? Colors.white70 : Colors.black54,
                                             ),
                                           ),
@@ -179,7 +180,7 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0.w),
                   child: Row(
                     children: <Widget>[
                       Expanded(
@@ -192,24 +193,24 @@ class _ParentChatScreenState extends State<ParentChatScreen> {
                             filled: true,
                             fillColor: Colors.white, // لون خلفية حقل النص
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(30.0.r),
                               borderSide: BorderSide(
                                 color: Colors.grey,
-                                width: 2.0,
+                                width: 2.0.w,
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(30.0.r),
                               borderSide: BorderSide(
                                 color: Colors.grey,
-                                width: 2.0,
+                                width: 2.0.w,
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(30.0.r),
                               borderSide: BorderSide(
                                 color: Colors.blue,
-                                width: 2.0,
+                                width: 2.0.w,
                               ),
                             ),
                           ),

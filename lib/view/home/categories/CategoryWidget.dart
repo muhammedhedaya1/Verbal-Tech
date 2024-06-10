@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:help_me_talk/view/home/categories/category.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -22,12 +23,20 @@ class CategoryItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Image.asset(
-            category.image!,
-            height: 120,
-            width: double.infinity,
-            fit: BoxFit.fitHeight,
-          ),
+          if (category.image!.endsWith('.svg'))
+            SvgPicture.asset(
+              category.image!,
+              height: 120,
+              width: double.infinity,
+              fit: BoxFit.fitHeight,
+            )
+          else
+            Image.asset(
+              category.image!,
+              height: 120,
+              width: double.infinity,
+              fit: BoxFit.fitHeight,
+            ),
           Text(
             category.title!,
             style: TextStyle(fontSize: 22, color: Colors.white),

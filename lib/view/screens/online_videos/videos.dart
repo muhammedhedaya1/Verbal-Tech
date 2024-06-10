@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:help_me_talk/view/screens/online_videos/VideoPlayerScreen.dart';
 
 class VideoGridView extends StatelessWidget {
@@ -27,52 +28,55 @@ class VideoGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('فيديوهات لطفلك', style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold)),
+        title: Text('فيديوهات لطفلك', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 22.sp)),
         centerTitle: true,
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.blue),
       ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
-          childAspectRatio: 16 / 9,
-          crossAxisCount: 2,
+      body: Padding(
+        padding: EdgeInsets.all(16.w),
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisSpacing: 20.h,
+            crossAxisSpacing: 20.w,
+            childAspectRatio: 16 / 9,
+            crossAxisCount: 2,
+          ),
+          itemCount: videoMap.length,
+          itemBuilder: (context, index) {
+            final title = videoMap.keys.elementAt(index);
+            final videoUrl = videoMap.values.elementAt(index);
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VideoPlayerScreen(videoUrl: videoUrl),
+                  ),
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.all(8.w),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.r),
+                  border: Border.all(color: Colors.blue, width: 2.w),
+                ),
+                child: Center(
+                  child: Text(
+                    title,
+                    style: TextStyle(color: Colors.pink, fontSize: 18.sp),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            );
+          },
         ),
-        itemCount: videoMap.length,
-        itemBuilder: (context, index) {
-          final title = videoMap.keys.elementAt(index);
-          final videoId = videoMap.values.elementAt(index);
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => VideoPlayerScreen(videoId: videoId),
-                ),
-              );
-            },
-            child: Container(
-              margin: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20.0),
-                border: Border.all(color: Colors.blue, width: 2.0),
-              ),
-              child: Center(
-                child: Text(
-                  title,
-                  style: TextStyle(color: Colors.pink, fontSize: 20),
-                ),
-              ),
-            ),
-          );
-        },
       ),
     );
   }
 }
-
-

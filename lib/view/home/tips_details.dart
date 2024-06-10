@@ -38,45 +38,34 @@ class _TipsDetailsState extends State<TipsDetails> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text(
-          ' ${widget.arguments.name}',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+        backgroundColor: Colors.white,
+        title: Center(
+          child: Text(
+            ' ${widget.arguments.name}',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue),
+          ),
         ),
         iconTheme: IconThemeData(
-          color: Colors.white, // Setting the back arrow color to white
+          color: Colors.blue, // Setting the back arrow color to white
         ),
       ),
-      body: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          return Opacity(
-            opacity: _opacityAnimation.value,
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: ListView.builder(
-                  itemCount: verses.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      margin: EdgeInsets.all(25),
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
-                        borderSide: BorderSide(color: Colors.blue)
-                      ),
-                      color: Colors.white,
-                      elevation: 3,
-                      child: Text(
-                        verses[index],
-                        style: TextStyle(fontSize: 25, color: Colors.blue),
-                        textAlign: TextAlign.center,
-                      ),
-                    );
-                  },
-                ),
-              ),
+      body: ListView.builder(
+        itemCount: verses.length,
+        itemBuilder: (context, index) {
+          return Card(
+            margin: EdgeInsets.all(25),
+            shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25),
+              borderSide: BorderSide(color: Colors.blue)
+            ),
+            color: Colors.white,
+            elevation: 3,
+            child: Text(
+              verses[index],
+              style: TextStyle(fontSize: 25, color: Colors.blue),
+              textAlign: TextAlign.center,
             ),
           );
         },

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:help_me_talk/core/shared/network/firebase/firebase_manager.dart';
 import 'package:help_me_talk/data/model/exercise_model/exercise_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TasksTab extends StatefulWidget {
   @override
@@ -16,14 +17,12 @@ class _TasksTabState extends State<TasksTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(centerTitle: true,
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.blue),
-        title: Center(
-          child: Text(
-            'مواعيد التمارين الخاصة بالطفل',
-            style: TextStyle(color: Colors.blue),
-          ),
+        title: Text(
+          'مواعيد التمارين الخاصة بالطفل',
+          style: TextStyle(color: Colors.blue, fontSize: 18.sp), // Adjust font size using ScreenUtil
         ),
       ),
       backgroundColor: Colors.white,
@@ -38,7 +37,7 @@ class _TasksTabState extends State<TasksTab> {
                 selectedDate = date;
               });
             },
-            leftMargin: 20,
+            leftMargin: 20.w,
             monthColor: Colors.blueGrey,
             dayColor: Colors.teal[200],
             activeDayColor: Colors.white,
@@ -61,7 +60,7 @@ class _TasksTabState extends State<TasksTab> {
                 return ListView.builder(
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0), // Add space between items
+                      padding: EdgeInsets.symmetric(vertical: 8.h), // Use ScreenUtil for padding
                       child: ExerciseItem(tasks[index]),
                     );
                   },
@@ -95,8 +94,8 @@ class ExerciseItem extends StatelessWidget {
             icon: Icons.delete,
             label: 'حذف',
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              bottomLeft: Radius.circular(20),
+              topLeft: Radius.circular(20.r), // Use ScreenUtil for radius
+              bottomLeft: Radius.circular(20.r),
             ),
           ),
         ],
@@ -104,21 +103,23 @@ class ExerciseItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.blue[50],
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r), // Use ScreenUtil for radius
         ),
         child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          contentPadding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h), // Use ScreenUtil for padding
           title: Text(
             exercise.title,
             style: TextStyle(
               color: Colors.blue,
               fontWeight: FontWeight.bold,
+              fontSize: 16.sp, // Adjust font size using ScreenUtil
             ),
           ),
           subtitle: Text(
             exercise.description,
             style: TextStyle(
               color: Colors.blueGrey,
+              fontSize: 14.sp, // Adjust font size using ScreenUtil
             ),
           ),
         ),

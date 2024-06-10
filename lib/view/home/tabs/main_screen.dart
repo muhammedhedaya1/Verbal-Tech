@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:help_me_talk/view/home/categories/CategoriesFields.dart';
-import 'package:help_me_talk/view/home/categories/CategoryWidget.dart';
 
 class MainScreen extends StatelessWidget {
   @override

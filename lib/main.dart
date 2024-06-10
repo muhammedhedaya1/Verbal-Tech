@@ -9,6 +9,7 @@ import 'package:help_me_talk/routes.dart';
 import 'package:help_me_talk/view/home/homescreen.dart';
 import 'package:help_me_talk/view/screens/auth/loginforparent.dart';
 import 'package:help_me_talk/view/screens/onboardingprefect/screen_one.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,12 +33,17 @@ class MyApp extends StatelessWidget {
     bool isOnBoardingVisited =
         CacheHelper().getData(key: "isOnBoardingVisited") ?? false;
 
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: isLoggedIn
-          ? LoginForParent()
-          : (isOnBoardingVisited ? HomeScreen() : OnboardingScreenOne()),
-      routes: routes,
+    return ScreenUtilInit(
+      designSize: Size(360, 800),
+      builder: (context, child) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: isLoggedIn
+              ? LoginForParent()
+              : (isOnBoardingVisited ? HomeScreen() : OnboardingScreenOne()),
+          routes: routes,
+        );
+      },
     );
   }
 }

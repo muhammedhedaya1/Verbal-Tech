@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:help_me_talk/data/model/exercise_model/tips_model.dart';
 import 'package:help_me_talk/view/home/tips_details.dart';
 
@@ -33,41 +34,41 @@ class TipsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,        iconTheme: IconThemeData(color: Colors.blue), // لون سهم الرجوع
-
+      appBar: AppBar(centerTitle: true,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.blue), // لون سهم الرجوع
         title: Text(
           "نصائح",
-          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 20.sp),
         ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.w),
             child: ClipOval(
               child: Image.asset(
                 "assets/images/tips_screen.jpg",
-                height: 180,
-                width: 180,
+                height: 180.h,
+                width: 180.w,
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 20.h),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 20.h),
           Expanded(
             child: ListView.separated(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               separatorBuilder: (context, index) => Divider(
                 thickness: 1,
                 color: Colors.blue,
-                endIndent: 10,
-                indent: 10,
+                endIndent: 10.w,
+                indent: 10.w,
               ),
               itemCount: someTips.length,
               itemBuilder: (context, index) {
@@ -83,11 +84,11 @@ class TipsScreen extends StatelessWidget {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.w),
                     child: Text(
                       someTips[index],
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 25),
+                      style: TextStyle(fontSize: 25.sp),
                     ),
                   ),
                 );

@@ -1,8 +1,34 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class PrivacyPolicyScreen extends StatelessWidget {
+class PrivacyPolicyScreen extends StatefulWidget {
+  @override
+  _PrivacyPolicyScreenState createState() => _PrivacyPolicyScreenState();
+}
+
+class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
+  List<dynamic> _sections = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPrivacyPolicy();
+  }
+
+  Future<void> _loadPrivacyPolicy() async {
+    final String response = await rootBundle.loadString('assets/privacy_policy.json');
+    final data = await json.decode(response);
+    setState(() {
+      _sections = data['sections'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: Size(360, 690), minTextAdapt: true, splitScreenMode: true);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -12,114 +38,37 @@ class PrivacyPolicyScreen extends StatelessWidget {
         ),
         title: Text(
           'سياسة الخصوصية',
-          style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize:25),
+          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 25.sp),
         ),
         centerTitle: true,
         elevation: 0,
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
+        padding: EdgeInsets.all(16.w),
+        child: _sections.isEmpty
+            ? Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '1. مقدمة',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),
-              ),
-              Text(
-                'نحن نأخذ خصوصيتك على محمل الجد. توضح سياسة الخصوصية هذه كيفية جمع واستخدام وحماية معلوماتك الشخصية في تطبيقنا.',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '2. المعلومات التي نجمعها',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),
-              ),
-              Text(
-                'نقوم بجمع المعلومات التالية:',
-                style: TextStyle(fontSize: 22),
-              ),
-              Text(
-                '- المعلومات الشخصية مثل الاسم، البريد الإلكتروني، صورة الحساب.',
-                style: TextStyle(fontSize: 20),
-              ),
-              Text(
-                '- المعلومات المتعلقة بالاستخدام مثل التمارين المنجزة، المواعيد.',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '3. كيفية استخدام المعلومات',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),
-              ),
-              Text(
-                'نستخدم المعلومات التي نجمعها للأغراض التالية:',
-                style: TextStyle(fontSize: 20),
-              ),
-              Text(
-                '- تقديم وتحسين خدماتنا.',
-                style: TextStyle(fontSize: 20),
-              ),
-              Text(
-                '- التواصل معك بشأن حسابك واستخدامك للتطبيق.',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '4. حماية المعلومات',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),
-              ),
-              Text(
-                'نحن نتخذ إجراءات معقولة لحماية معلوماتك الشخصية من الوصول غير المصرح به أو الكشف عنها أو التعديل أو التدمير.',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '5. مشاركة المعلومات',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),
-              ),
-              Text(
-                'نحن لا نشارك معلوماتك الشخصية مع أطراف ثالثة، باستثناء الحالات التالية:',
-                style: TextStyle(fontSize: 20),
-              ),
-              Text(
-                '- عندما نحصل على موافقتك على القيام بذلك.',
-                style: TextStyle(fontSize: 20),
-              ),
-              Text(
-                '- عندما يكون من الضروري للامتثال للقوانين أو اللوائح أو الإجراءات القانونية.',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '6. حقوقك',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),
-              ),
-              Text(
-                'لديك حقوق معينة تتعلق بمعلوماتك الشخصية، بما في ذلك الحق في الوصول إليها وتصحيحها وحذفها.',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '7. تغييرات في سياسة الخصوصية',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),
-              ),
-              Text(
-                'قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنعلمك بأي تغييرات من خلال نشر السياسة الجديدة على هذه الصفحة.',
-                style: TextStyle(fontSize: 2),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '8. اتصل بنا',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),
-              ),
-              Text(
-                'إذا كانت لديك أي أسئلة أو مخاوف بشأن سياسة الخصوصية هذه، يرجى الاتصال بنا على [mmohammedhedaya@gmail.com].',
-                style: TextStyle(fontSize: 20),
-              ),
-            ],
+            children: _sections.map<Widget>((section) {
+              return Padding(
+                padding: EdgeInsets.only(bottom: 16.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      section['title'],
+                      style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold, color: Colors.blue),
+                    ),
+                    Text(
+                      section['content'],
+                      style: TextStyle(fontSize: 20.sp),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
           ),
         ),
       ),

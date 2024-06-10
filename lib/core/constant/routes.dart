@@ -1,5 +1,4 @@
 class AppRoute{
-  static const String ChoiseScreenForLoginOrSignUp= "/ChoiseScreenForLoginOrSignUp";
   static const String onBoarding= "/onBoarding";
   static const String SignUpForDoctor= "/signupfordoctor";
   static const String DoctorLoginPage= "/DoctorLoginPage";

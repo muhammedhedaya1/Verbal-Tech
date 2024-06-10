@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:help_me_talk/childreen/RecordResponseScreen.dart';
 
 class ExerciseDetailsScreen extends StatelessWidget {
@@ -10,16 +11,16 @@ class ExerciseDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: Size(360, 690), minTextAdapt: true, splitScreenMode: true);
+
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(centerTitle: true,
         iconTheme: IconThemeData(
           color: Colors.blue, // Change the back arrow color
         ),
-        title: Center(
-          child: Text(
-            'تفاصيل التمرين',
-            style: TextStyle(color: Colors.blue), // Change the title color
-          ),
+        title: Text(
+          'تفاصيل التمرين',
+          style: TextStyle(color: Colors.blue), // Change the title color
         ),
         backgroundColor: Colors.white, // Set the AppBar background color to white
       ),
@@ -33,37 +34,37 @@ class ExerciseDetailsScreen extends StatelessWidget {
 
           var exercise = snapshot.data!;
           return Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
                   child: Text(
                     'التمرين: ${exercise['title']}',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+                    style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, color: Colors.blueAccent),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 Center(
                   child: Text(
                     'المطلوب: ${exercise['description']}',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black87),
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500, color: Colors.black87),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 exercise['imageUrl'] != null
                     ? Center(
                   child: ClipOval(
                     child: Image.network(
                       exercise['imageUrl'],
-                      width: 150,
-                      height: 150,
+                      width: 150.w,
+                      height: 150.h,
                       fit: BoxFit.cover,
                     ),
                   ),
                 )
                     : SizedBox.shrink(),
-                SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 Center(
                   child: GestureDetector(
                     onTap: () {
@@ -77,12 +78,12 @@ class ExerciseDetailsScreen extends StatelessWidget {
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.symmetric(
-                        vertical: 10.0,
-                        horizontal: 10.0,
+                        vertical: 10.h,
+                        horizontal: 10.w,
                       ),
                       decoration: BoxDecoration(
                         color: Colors.blue,
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.r),
                       ),
                       child: Center(
                         child: Row(
@@ -93,13 +94,13 @@ class ExerciseDetailsScreen extends StatelessWidget {
                               color: Colors.white,
                             ),
                             SizedBox(
-                              width: 20,
+                              width: 20.w,
                             ),
                             Text(
-                              "يمكنك تسجيل ردك الان",
+                              "يمكنك التسجيل الان",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 22.0,
+                                fontSize: 22.sp,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
