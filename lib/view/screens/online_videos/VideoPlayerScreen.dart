@@ -11,8 +11,8 @@ class VideoPlayerScreen extends StatelessWidget {
     final videoId = YoutubePlayer.convertUrlToId(videoUrl);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('مشغل الفيديو'),
+      appBar: AppBar(centerTitle: true,
+        title: Text('مشغل الفيديو',style: TextStyle(color: Colors.blue),),
       ),
       body: YoutubePlayer(
         controller: YoutubePlayerController(
